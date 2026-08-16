@@ -21,6 +21,15 @@ node vectors/verify_vectors.mjs   # the conformance corpus, byte for byte
 node receipts/verify.mjs          # real production receipts, two custodies
 ```
 
+Got an **evidence bundle** (the portable export a Zimam console or control
+plane produces)? Verify it the same way — keys, signatures, guards, and
+chain, with every stated key id and algorithm recomputed from the key
+material rather than believed:
+
+```bash
+node verify-bundle.mjs path/to/bundle.json
+```
+
 The second command verifies **actual receipts from the system governing its
 own construction**: two chains — one signed by a separated signer daemon
 with the OS kernel's caller attestation inside the signed bytes, one
