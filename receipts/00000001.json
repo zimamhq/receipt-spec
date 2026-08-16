@@ -1,0 +1,65 @@
+{
+  "payload": {
+    "action": {
+      "action_class": "READ",
+      "enforced_identity": "sha256:1c30b3318aa5010e7404d29e1f51e733023605acb9d17a93c6e6973316d5661f",
+      "input_identity": "sha256:1c30b3318aa5010e7404d29e1f51e733023605acb9d17a93c6e6973316d5661f",
+      "tool": "read_text_file"
+    },
+    "agent_id": "claude-code",
+    "approval": {
+      "approver_id": "majeed",
+      "decided_at": 1786488894395,
+      "initiator_id": "claude-code"
+    },
+    "controls_evaluated": {
+      "capability": {
+        "detail": {
+          "action_class": "READ",
+          "registered": true
+        },
+        "status": "pass"
+      },
+      "ceilings": {
+        "status": "not_evaluated"
+      },
+      "identity": {
+        "detail": {
+          "agent_id": "claude-code"
+        },
+        "status": "not_evaluated"
+      },
+      "policy": {
+        "status": "not_evaluated"
+      },
+      "post_eval": {
+        "status": "not_evaluated"
+      },
+      "trust_gate": {
+        "detail": {
+          "level": "L0_PROBATION"
+        },
+        "status": "escalate"
+      }
+    },
+    "issued_at": 1786488894395,
+    "previous_receipt_hash": "sha256:5f212ea60d1c06228cd88ec904a5f51d3b2c6993d07fb7fc3fe06751f9c749dc",
+    "reason_code": "MATRIX_REQUIRE_APPROVAL",
+    "result_digest": "sha256:d9a56d2f53331a277bcba544aaf2722dc2640a70f322954f0076af9a94fe84bd",
+    "run_id": "06a97acc-9490-455c-abe7-0b64979a44b3",
+    "seq": 1,
+    "signer": {
+      "peer_gid": 20,
+      "peer_uid": 501
+    },
+    "spec": "zimam.receipt",
+    "spec_version": "1.0.0-draft.1",
+    "tenant_id": "self-hosted",
+    "verdict": "escalate"
+  },
+  "signature": {
+    "alg": "EdDSA",
+    "kid": "sha256:d9bef6ccc49e9e4aa7fe461793763297220ba9bffb2a6ce284e28581525a6cf6",
+    "signature": "autZLpP435P1C-XJLXIp2maOLaAMIq7cNQGKFW7EEDiAjLhoFdHH6iipmKzXtZtcbsKH1wyDNUHziqttq5OTBw"
+  }
+}

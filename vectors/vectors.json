@@ -1,0 +1,649 @@
+{
+  "spec": "zimam.receipt.vectors",
+  "version": "1",
+  "note": "Deterministic cross-language vectors for the Zimam signed-receipt format (RFC 8785 JCS, payload-only chaining, sha256: wire form). Regenerate with pnpm vectors:generate; verify in Python with vectors/verify_vectors.py.",
+  "test_key": {
+    "note": "TEST KEY — published on purpose; never use outside the vectors",
+    "private_pem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIAZtSOTdZKSfyuQ9b4o4qMz+373iMGvTwx6oK9aOCrVU\n-----END PRIVATE KEY-----\n",
+    "public_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEABZQ8ykz3osbdaZVGYjkKtKKpRIE0wHEBaJxpESJ57Z0=\n-----END PUBLIC KEY-----\n",
+    "kid": "sha256:79b5b78696872d601bc7419c85cb3c390caaa912b59614d47c1cf86a540be466"
+  },
+  "canonicalization": [
+    {
+      "name": "key-sort-utf16-code-units",
+      "input": {
+        "z": 1,
+        "é": 2,
+        "😀": 3,
+        "￿": 4,
+        "a": 5
+      },
+      "jcs": "{\"a\":5,\"z\":1,\"é\":2,\"😀\":3,\"￿\":4}",
+      "sha256": "sha256:f4a63f9fd4b7418b2f35c76f5d0e9550ca1a53a0d2f521d8aaf6bf40a559ed4a"
+    },
+    {
+      "name": "string-escapes",
+      "input": {
+        "text": "line\nbreak \"quoted\" back\\slash\ttab \u0007bell é😀",
+        "control": "\u0001\u001f"
+      },
+      "jcs": "{\"control\":\"\\u0001\\u001f\",\"text\":\"line\\nbreak \\\"quoted\\\" back\\\\slash\\ttab \\u0007bell é😀\"}",
+      "sha256": "sha256:47ae77feea11a3ab8b0660d813fc1e4e1441131a7c131991d2bd41b1c7a978ed"
+    },
+    {
+      "name": "integers-only",
+      "input": {
+        "zero": 0,
+        "negative": -7,
+        "max_safe": 9007199254740991,
+        "min_safe": -9007199254740991
+      },
+      "jcs": "{\"max_safe\":9007199254740991,\"min_safe\":-9007199254740991,\"negative\":-7,\"zero\":0}",
+      "sha256": "sha256:934af29a9b0ba1258630d511a70db7cd7d3a08c85e3d7725e33969eeac2fdb5c"
+    },
+    {
+      "name": "empties-and-literals",
+      "input": {
+        "empty_obj": {},
+        "empty_arr": [],
+        "nil": null,
+        "yes": true,
+        "no": false
+      },
+      "jcs": "{\"empty_arr\":[],\"empty_obj\":{},\"nil\":null,\"no\":false,\"yes\":true}",
+      "sha256": "sha256:b07ca1e489d5a09459e9e22fc7932e343a9d14334e663303d5c19cb00ce32617"
+    },
+    {
+      "name": "nesting-and-arrays",
+      "input": {
+        "arr": [
+          1,
+          {
+            "b": 2,
+            "a": [
+              3,
+              null,
+              "x"
+            ]
+          },
+          [
+            []
+          ]
+        ]
+      },
+      "jcs": "{\"arr\":[1,{\"a\":[3,null,\"x\"],\"b\":2},[[]]]}",
+      "sha256": "sha256:eddac45eac6fb702dec45af64e60a17c2cb519d7f86224948c122ec1a6c2d280"
+    },
+    {
+      "name": "action-identity-shape",
+      "input": {
+        "actionClass": "COMM_EXTERNAL",
+        "args": {
+          "body": "مرحبا — AI-generated. تفاصيل الطلب أدناه.",
+          "to": "user@example.com"
+        },
+        "tool": "mail.send"
+      },
+      "jcs": "{\"actionClass\":\"COMM_EXTERNAL\",\"args\":{\"body\":\"مرحبا — AI-generated. تفاصيل الطلب أدناه.\",\"to\":\"user@example.com\"},\"tool\":\"mail.send\"}",
+      "sha256": "sha256:d6840b0e4f5054377208ec4e96222e35c0ed574ca218bfd251eab6ccc9aaa825"
+    }
+  ],
+  "receipts": [
+    {
+      "name": "genesis-allow",
+      "payload": {
+        "spec": "zimam.receipt",
+        "spec_version": "1.0.0-draft.1",
+        "seq": 0,
+        "issued_at": 1700000000000,
+        "tenant_id": "tenant-vector",
+        "agent_id": "agent-vector",
+        "run_id": "run-0",
+        "action": {
+          "tool": "mail.send",
+          "action_class": "COMM_EXTERNAL",
+          "input_identity": "sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30",
+          "enforced_identity": "sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30"
+        },
+        "verdict": "allow",
+        "reason_code": "EXECUTE_SUCCESS",
+        "controls_evaluated": {
+          "identity": {
+            "status": "not_evaluated",
+            "detail": {
+              "agent_id": "agent-vector"
+            }
+          },
+          "capability": {
+            "status": "pass",
+            "detail": {
+              "action_class": "COMM_EXTERNAL",
+              "registered": true
+            }
+          },
+          "policy": {
+            "status": "pass",
+            "matched_count": 0,
+            "detail": {
+              "reason_code": "EXECUTE_SUCCESS"
+            }
+          },
+          "trust_gate": {
+            "status": "pass",
+            "detail": {
+              "level": "L2_TRUSTED"
+            }
+          },
+          "ceilings": {
+            "status": "not_evaluated"
+          },
+          "post_eval": {
+            "status": "not_evaluated"
+          }
+        },
+        "previous_receipt_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "result_digest": "sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2"
+      },
+      "jcs": "{\"action\":{\"action_class\":\"COMM_EXTERNAL\",\"enforced_identity\":\"sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30\",\"input_identity\":\"sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30\",\"tool\":\"mail.send\"},\"agent_id\":\"agent-vector\",\"controls_evaluated\":{\"capability\":{\"detail\":{\"action_class\":\"COMM_EXTERNAL\",\"registered\":true},\"status\":\"pass\"},\"ceilings\":{\"status\":\"not_evaluated\"},\"identity\":{\"detail\":{\"agent_id\":\"agent-vector\"},\"status\":\"not_evaluated\"},\"policy\":{\"detail\":{\"reason_code\":\"EXECUTE_SUCCESS\"},\"matched_count\":0,\"status\":\"pass\"},\"post_eval\":{\"status\":\"not_evaluated\"},\"trust_gate\":{\"detail\":{\"level\":\"L2_TRUSTED\"},\"status\":\"pass\"}},\"issued_at\":1700000000000,\"previous_receipt_hash\":\"sha256:0000000000000000000000000000000000000000000000000000000000000000\",\"reason_code\":\"EXECUTE_SUCCESS\",\"result_digest\":\"sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2\",\"run_id\":\"run-0\",\"seq\":0,\"spec\":\"zimam.receipt\",\"spec_version\":\"1.0.0-draft.1\",\"tenant_id\":\"tenant-vector\",\"verdict\":\"allow\"}",
+      "sha256": "sha256:2e9fa3dd09378ca6efd85b936c88d729265b133f064bd8cdc7820c37b0ed0c70",
+      "signature": {
+        "alg": "EdDSA",
+        "kid": "sha256:79b5b78696872d601bc7419c85cb3c390caaa912b59614d47c1cf86a540be466",
+        "signature": "rTV4wW6sEYWu40F-P9EFfLGarn0X4Kq1_AyVUQYhzYhJB0avJRLPG7KUBQFStIqmKgHttIhD6i_5NKHSxLXXDg"
+      }
+    },
+    {
+      "name": "transform-redaction",
+      "payload": {
+        "spec": "zimam.receipt",
+        "spec_version": "1.0.0-draft.1",
+        "seq": 1,
+        "issued_at": 1700000001000,
+        "tenant_id": "tenant-vector",
+        "agent_id": "agent-vector",
+        "run_id": "run-1",
+        "action": {
+          "tool": "mail.send",
+          "action_class": "COMM_EXTERNAL",
+          "input_identity": "sha256:0f3e52445f187466edff1f56b6feebc288d668c5c1522cdb0d1e6d25821e7674",
+          "enforced_identity": "sha256:c2fb5670401065a7b03f03c2dbbdb5d0dcb685c1e304e23c4182c6927ed86b13"
+        },
+        "verdict": "transform",
+        "reason_code": "TRANSFORM_APPLIED",
+        "controls_evaluated": {
+          "identity": {
+            "status": "not_evaluated",
+            "detail": {
+              "agent_id": "agent-vector"
+            }
+          },
+          "capability": {
+            "status": "pass",
+            "detail": {
+              "action_class": "COMM_EXTERNAL",
+              "registered": true
+            }
+          },
+          "policy": {
+            "status": "transform",
+            "matched_count": 1,
+            "detail": {
+              "reason_code": "TRANSFORM_APPLIED"
+            }
+          },
+          "trust_gate": {
+            "status": "pass",
+            "detail": {
+              "level": "L2_TRUSTED"
+            }
+          },
+          "ceilings": {
+            "status": "not_evaluated"
+          },
+          "post_eval": {
+            "status": "not_evaluated"
+          }
+        },
+        "previous_receipt_hash": "sha256:2e9fa3dd09378ca6efd85b936c88d729265b133f064bd8cdc7820c37b0ed0c70",
+        "result_digest": "sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2"
+      },
+      "jcs": "{\"action\":{\"action_class\":\"COMM_EXTERNAL\",\"enforced_identity\":\"sha256:c2fb5670401065a7b03f03c2dbbdb5d0dcb685c1e304e23c4182c6927ed86b13\",\"input_identity\":\"sha256:0f3e52445f187466edff1f56b6feebc288d668c5c1522cdb0d1e6d25821e7674\",\"tool\":\"mail.send\"},\"agent_id\":\"agent-vector\",\"controls_evaluated\":{\"capability\":{\"detail\":{\"action_class\":\"COMM_EXTERNAL\",\"registered\":true},\"status\":\"pass\"},\"ceilings\":{\"status\":\"not_evaluated\"},\"identity\":{\"detail\":{\"agent_id\":\"agent-vector\"},\"status\":\"not_evaluated\"},\"policy\":{\"detail\":{\"reason_code\":\"TRANSFORM_APPLIED\"},\"matched_count\":1,\"status\":\"transform\"},\"post_eval\":{\"status\":\"not_evaluated\"},\"trust_gate\":{\"detail\":{\"level\":\"L2_TRUSTED\"},\"status\":\"pass\"}},\"issued_at\":1700000001000,\"previous_receipt_hash\":\"sha256:2e9fa3dd09378ca6efd85b936c88d729265b133f064bd8cdc7820c37b0ed0c70\",\"reason_code\":\"TRANSFORM_APPLIED\",\"result_digest\":\"sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2\",\"run_id\":\"run-1\",\"seq\":1,\"spec\":\"zimam.receipt\",\"spec_version\":\"1.0.0-draft.1\",\"tenant_id\":\"tenant-vector\",\"verdict\":\"transform\"}",
+      "sha256": "sha256:be497a742b5c334dc136ec01c429346bdfb603aeb5afe5ee5bf963dbf036d961",
+      "signature": {
+        "alg": "EdDSA",
+        "kid": "sha256:79b5b78696872d601bc7419c85cb3c390caaa912b59614d47c1cf86a540be466",
+        "signature": "SIEJhusKrqs7qnQ57SPZPnWwHZ2DQSOOWSiMgxCjMoRVxoO1FkHNCCYwX1qM7Mq-uEfmsxEJCfEn9WzxOxF7BA"
+      }
+    },
+    {
+      "name": "approved-escalate",
+      "payload": {
+        "spec": "zimam.receipt",
+        "spec_version": "1.0.0-draft.1",
+        "seq": 2,
+        "issued_at": 1700000002000,
+        "tenant_id": "tenant-vector",
+        "agent_id": "agent-vector",
+        "run_id": "run-2",
+        "action": {
+          "tool": "mail.send",
+          "action_class": "COMM_EXTERNAL",
+          "input_identity": "sha256:c5c77e83be64dfc88fb0f4f2f02b2e0bc0672ce9f62fbf3ac2e7e1035508d20a",
+          "enforced_identity": "sha256:c5c77e83be64dfc88fb0f4f2f02b2e0bc0672ce9f62fbf3ac2e7e1035508d20a"
+        },
+        "verdict": "escalate",
+        "reason_code": "ESCALATE_RULE",
+        "controls_evaluated": {
+          "identity": {
+            "status": "not_evaluated",
+            "detail": {
+              "agent_id": "agent-vector"
+            }
+          },
+          "capability": {
+            "status": "pass",
+            "detail": {
+              "action_class": "COMM_EXTERNAL",
+              "registered": true
+            }
+          },
+          "policy": {
+            "status": "escalate",
+            "matched_count": 2,
+            "detail": {
+              "reason_code": "ESCALATE_RULE"
+            }
+          },
+          "trust_gate": {
+            "status": "not_evaluated"
+          },
+          "ceilings": {
+            "status": "not_evaluated"
+          },
+          "post_eval": {
+            "status": "not_evaluated"
+          }
+        },
+        "previous_receipt_hash": "sha256:be497a742b5c334dc136ec01c429346bdfb603aeb5afe5ee5bf963dbf036d961",
+        "approval": {
+          "initiator_id": "agent-vector",
+          "approver_id": "majeed",
+          "decided_at": 1700000002500
+        },
+        "result_digest": "sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2"
+      },
+      "jcs": "{\"action\":{\"action_class\":\"COMM_EXTERNAL\",\"enforced_identity\":\"sha256:c5c77e83be64dfc88fb0f4f2f02b2e0bc0672ce9f62fbf3ac2e7e1035508d20a\",\"input_identity\":\"sha256:c5c77e83be64dfc88fb0f4f2f02b2e0bc0672ce9f62fbf3ac2e7e1035508d20a\",\"tool\":\"mail.send\"},\"agent_id\":\"agent-vector\",\"approval\":{\"approver_id\":\"majeed\",\"decided_at\":1700000002500,\"initiator_id\":\"agent-vector\"},\"controls_evaluated\":{\"capability\":{\"detail\":{\"action_class\":\"COMM_EXTERNAL\",\"registered\":true},\"status\":\"pass\"},\"ceilings\":{\"status\":\"not_evaluated\"},\"identity\":{\"detail\":{\"agent_id\":\"agent-vector\"},\"status\":\"not_evaluated\"},\"policy\":{\"detail\":{\"reason_code\":\"ESCALATE_RULE\"},\"matched_count\":2,\"status\":\"escalate\"},\"post_eval\":{\"status\":\"not_evaluated\"},\"trust_gate\":{\"status\":\"not_evaluated\"}},\"issued_at\":1700000002000,\"previous_receipt_hash\":\"sha256:be497a742b5c334dc136ec01c429346bdfb603aeb5afe5ee5bf963dbf036d961\",\"reason_code\":\"ESCALATE_RULE\",\"result_digest\":\"sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2\",\"run_id\":\"run-2\",\"seq\":2,\"spec\":\"zimam.receipt\",\"spec_version\":\"1.0.0-draft.1\",\"tenant_id\":\"tenant-vector\",\"verdict\":\"escalate\"}",
+      "sha256": "sha256:d4ef9e527367d16a1ea3507bca9292495682cd80056e80109c385c101056ff06",
+      "signature": {
+        "alg": "EdDSA",
+        "kid": "sha256:79b5b78696872d601bc7419c85cb3c390caaa912b59614d47c1cf86a540be466",
+        "signature": "-tsL4sTXjuf306MYhPXIwuHevEd1FzZj-qy9NV3tclKlomDXUt2Q7QqNHZpfQmskkncB2JfJrE2ah3JWDws8CA"
+      }
+    },
+    {
+      "name": "deny-no-result",
+      "payload": {
+        "spec": "zimam.receipt",
+        "spec_version": "1.0.0-draft.1",
+        "seq": 3,
+        "issued_at": 1700000003000,
+        "tenant_id": "tenant-vector",
+        "agent_id": "agent-vector",
+        "run_id": "run-3",
+        "action": {
+          "tool": "mail.send",
+          "action_class": "COMM_EXTERNAL",
+          "input_identity": "sha256:8391e730364712ca3c0c502021fe2128d9900c2f753813b2fc1a6b281cce1912",
+          "enforced_identity": "sha256:8391e730364712ca3c0c502021fe2128d9900c2f753813b2fc1a6b281cce1912"
+        },
+        "verdict": "deny",
+        "reason_code": "BLOCK_RULE",
+        "controls_evaluated": {
+          "identity": {
+            "status": "not_evaluated",
+            "detail": {
+              "agent_id": "agent-vector"
+            }
+          },
+          "capability": {
+            "status": "pass",
+            "detail": {
+              "action_class": "COMM_EXTERNAL",
+              "registered": true
+            }
+          },
+          "policy": {
+            "status": "deny",
+            "matched_count": 1,
+            "detail": {
+              "reason_code": "BLOCK_RULE"
+            }
+          },
+          "trust_gate": {
+            "status": "not_evaluated"
+          },
+          "ceilings": {
+            "status": "not_evaluated"
+          },
+          "post_eval": {
+            "status": "not_evaluated"
+          }
+        },
+        "previous_receipt_hash": "sha256:d4ef9e527367d16a1ea3507bca9292495682cd80056e80109c385c101056ff06"
+      },
+      "jcs": "{\"action\":{\"action_class\":\"COMM_EXTERNAL\",\"enforced_identity\":\"sha256:8391e730364712ca3c0c502021fe2128d9900c2f753813b2fc1a6b281cce1912\",\"input_identity\":\"sha256:8391e730364712ca3c0c502021fe2128d9900c2f753813b2fc1a6b281cce1912\",\"tool\":\"mail.send\"},\"agent_id\":\"agent-vector\",\"controls_evaluated\":{\"capability\":{\"detail\":{\"action_class\":\"COMM_EXTERNAL\",\"registered\":true},\"status\":\"pass\"},\"ceilings\":{\"status\":\"not_evaluated\"},\"identity\":{\"detail\":{\"agent_id\":\"agent-vector\"},\"status\":\"not_evaluated\"},\"policy\":{\"detail\":{\"reason_code\":\"BLOCK_RULE\"},\"matched_count\":1,\"status\":\"deny\"},\"post_eval\":{\"status\":\"not_evaluated\"},\"trust_gate\":{\"status\":\"not_evaluated\"}},\"issued_at\":1700000003000,\"previous_receipt_hash\":\"sha256:d4ef9e527367d16a1ea3507bca9292495682cd80056e80109c385c101056ff06\",\"reason_code\":\"BLOCK_RULE\",\"run_id\":\"run-3\",\"seq\":3,\"spec\":\"zimam.receipt\",\"spec_version\":\"1.0.0-draft.1\",\"tenant_id\":\"tenant-vector\",\"verdict\":\"deny\"}",
+      "sha256": "sha256:86991c65aabbf5b73fbd0f997ec4f1c0d66589a2fe5775d34460d24eb693f1e0",
+      "signature": {
+        "alg": "EdDSA",
+        "kid": "sha256:79b5b78696872d601bc7419c85cb3c390caaa912b59614d47c1cf86a540be466",
+        "signature": "yeTKLJRnQqRh0t4x0Ds7_MQdTCNE76WiAuO1DJF2C24vYtkQPhcQfngY-TQBSF7pD-I64jZ3qB2g3AfdtmNwDg"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "name": "self-approval",
+      "payload": {
+        "spec": "zimam.receipt",
+        "spec_version": "1.0.0-draft.1",
+        "seq": 0,
+        "issued_at": 1700000000000,
+        "tenant_id": "tenant-vector",
+        "agent_id": "agent-vector",
+        "run_id": "run-0",
+        "action": {
+          "tool": "mail.send",
+          "action_class": "COMM_EXTERNAL",
+          "input_identity": "sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30",
+          "enforced_identity": "sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30"
+        },
+        "verdict": "allow",
+        "reason_code": "EXECUTE_SUCCESS",
+        "controls_evaluated": {
+          "identity": {
+            "status": "not_evaluated",
+            "detail": {
+              "agent_id": "agent-vector"
+            }
+          },
+          "capability": {
+            "status": "pass",
+            "detail": {
+              "action_class": "COMM_EXTERNAL",
+              "registered": true
+            }
+          },
+          "policy": {
+            "status": "pass",
+            "matched_count": 0,
+            "detail": {
+              "reason_code": "EXECUTE_SUCCESS"
+            }
+          },
+          "trust_gate": {
+            "status": "pass",
+            "detail": {
+              "level": "L2_TRUSTED"
+            }
+          },
+          "ceilings": {
+            "status": "not_evaluated"
+          },
+          "post_eval": {
+            "status": "not_evaluated"
+          }
+        },
+        "previous_receipt_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "result_digest": "sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2",
+        "approval": {
+          "initiator_id": "agent-vector",
+          "approver_id": "agent-vector",
+          "decided_at": 1700000000000
+        }
+      },
+      "last_seq": null,
+      "expected_violations": [
+        "self_approval_guard"
+      ]
+    },
+    {
+      "name": "false-control-attestation-missing-matched-count",
+      "payload": {
+        "spec": "zimam.receipt",
+        "spec_version": "1.0.0-draft.1",
+        "seq": 0,
+        "issued_at": 1700000000000,
+        "tenant_id": "tenant-vector",
+        "agent_id": "agent-vector",
+        "run_id": "run-0",
+        "action": {
+          "tool": "mail.send",
+          "action_class": "COMM_EXTERNAL",
+          "input_identity": "sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30",
+          "enforced_identity": "sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30"
+        },
+        "verdict": "allow",
+        "reason_code": "EXECUTE_SUCCESS",
+        "controls_evaluated": {
+          "identity": {
+            "status": "not_evaluated",
+            "detail": {
+              "agent_id": "agent-vector"
+            }
+          },
+          "capability": {
+            "status": "pass",
+            "detail": {
+              "action_class": "COMM_EXTERNAL",
+              "registered": true
+            }
+          },
+          "policy": {
+            "status": "pass",
+            "detail": {
+              "reason_code": "EXECUTE_SUCCESS"
+            }
+          },
+          "trust_gate": {
+            "status": "pass",
+            "detail": {
+              "level": "L2_TRUSTED"
+            }
+          },
+          "ceilings": {
+            "status": "not_evaluated"
+          },
+          "post_eval": {
+            "status": "not_evaluated"
+          }
+        },
+        "previous_receipt_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "result_digest": "sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2"
+      },
+      "last_seq": null,
+      "expected_violations": [
+        "false_control_attestation_guard"
+      ]
+    },
+    {
+      "name": "digest-not-wire-form",
+      "payload": {
+        "spec": "zimam.receipt",
+        "spec_version": "1.0.0-draft.1",
+        "seq": 0,
+        "issued_at": 1700000000000,
+        "tenant_id": "tenant-vector",
+        "agent_id": "agent-vector",
+        "run_id": "run-0",
+        "action": {
+          "tool": "mail.send",
+          "action_class": "COMM_EXTERNAL",
+          "input_identity": "sha256:NOT-HEX",
+          "enforced_identity": "sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30"
+        },
+        "verdict": "allow",
+        "reason_code": "EXECUTE_SUCCESS",
+        "controls_evaluated": {
+          "identity": {
+            "status": "not_evaluated",
+            "detail": {
+              "agent_id": "agent-vector"
+            }
+          },
+          "capability": {
+            "status": "pass",
+            "detail": {
+              "action_class": "COMM_EXTERNAL",
+              "registered": true
+            }
+          },
+          "policy": {
+            "status": "pass",
+            "matched_count": 0,
+            "detail": {
+              "reason_code": "EXECUTE_SUCCESS"
+            }
+          },
+          "trust_gate": {
+            "status": "pass",
+            "detail": {
+              "level": "L2_TRUSTED"
+            }
+          },
+          "ceilings": {
+            "status": "not_evaluated"
+          },
+          "post_eval": {
+            "status": "not_evaluated"
+          }
+        },
+        "previous_receipt_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "result_digest": "sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2"
+      },
+      "last_seq": null,
+      "expected_violations": [
+        "digest_not_sha256_wire_form"
+      ]
+    },
+    {
+      "name": "float-in-signed-field",
+      "payload": {
+        "spec": "zimam.receipt",
+        "spec_version": "1.0.0-draft.1",
+        "seq": 0,
+        "issued_at": 1700000000000.5,
+        "tenant_id": "tenant-vector",
+        "agent_id": "agent-vector",
+        "run_id": "run-0",
+        "action": {
+          "tool": "mail.send",
+          "action_class": "COMM_EXTERNAL",
+          "input_identity": "sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30",
+          "enforced_identity": "sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30"
+        },
+        "verdict": "allow",
+        "reason_code": "EXECUTE_SUCCESS",
+        "controls_evaluated": {
+          "identity": {
+            "status": "not_evaluated",
+            "detail": {
+              "agent_id": "agent-vector"
+            }
+          },
+          "capability": {
+            "status": "pass",
+            "detail": {
+              "action_class": "COMM_EXTERNAL",
+              "registered": true
+            }
+          },
+          "policy": {
+            "status": "pass",
+            "matched_count": 0,
+            "detail": {
+              "reason_code": "EXECUTE_SUCCESS"
+            }
+          },
+          "trust_gate": {
+            "status": "pass",
+            "detail": {
+              "level": "L2_TRUSTED"
+            }
+          },
+          "ceilings": {
+            "status": "not_evaluated"
+          },
+          "post_eval": {
+            "status": "not_evaluated"
+          }
+        },
+        "previous_receipt_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "result_digest": "sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2"
+      },
+      "last_seq": null,
+      "expected_violations": [
+        "float_in_signed_field"
+      ]
+    },
+    {
+      "name": "sequence-gap",
+      "payload": {
+        "spec": "zimam.receipt",
+        "spec_version": "1.0.0-draft.1",
+        "seq": 0,
+        "issued_at": 1700000000000,
+        "tenant_id": "tenant-vector",
+        "agent_id": "agent-vector",
+        "run_id": "run-0",
+        "action": {
+          "tool": "mail.send",
+          "action_class": "COMM_EXTERNAL",
+          "input_identity": "sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30",
+          "enforced_identity": "sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30"
+        },
+        "verdict": "allow",
+        "reason_code": "EXECUTE_SUCCESS",
+        "controls_evaluated": {
+          "identity": {
+            "status": "not_evaluated",
+            "detail": {
+              "agent_id": "agent-vector"
+            }
+          },
+          "capability": {
+            "status": "pass",
+            "detail": {
+              "action_class": "COMM_EXTERNAL",
+              "registered": true
+            }
+          },
+          "policy": {
+            "status": "pass",
+            "matched_count": 0,
+            "detail": {
+              "reason_code": "EXECUTE_SUCCESS"
+            }
+          },
+          "trust_gate": {
+            "status": "pass",
+            "detail": {
+              "level": "L2_TRUSTED"
+            }
+          },
+          "ceilings": {
+            "status": "not_evaluated"
+          },
+          "post_eval": {
+            "status": "not_evaluated"
+          }
+        },
+        "previous_receipt_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "result_digest": "sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2"
+      },
+      "last_seq": 3,
+      "expected_violations": [
+        "sequence_gap_guard"
+      ]
+    }
+  ]
+}

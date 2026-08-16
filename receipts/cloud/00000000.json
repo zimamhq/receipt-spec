@@ -1,0 +1,69 @@
+{
+  "payload": {
+    "action": {
+      "action_class": "READ",
+      "enforced_identity": "sha256:2e64958cf9461255e04e902c9da3ad3352efb072c1cf13a99766400a2a5da319",
+      "input_identity": "sha256:2e64958cf9461255e04e902c9da3ad3352efb072c1cf13a99766400a2a5da319",
+      "tool": "read_text_file"
+    },
+    "agent_id": "claude-code",
+    "approval": {
+      "approver_id": "majeed",
+      "decided_at": 1786496334603,
+      "initiator_id": "claude-code"
+    },
+    "controls_evaluated": {
+      "capability": {
+        "detail": {
+          "action_class": "READ",
+          "registered": true
+        },
+        "status": "pass"
+      },
+      "ceilings": {
+        "status": "not_evaluated"
+      },
+      "identity": {
+        "detail": {
+          "agent_id": "claude-code"
+        },
+        "status": "not_evaluated"
+      },
+      "policy": {
+        "detail": {
+          "reason_code": "EXECUTE_SUCCESS"
+        },
+        "matched_count": 0,
+        "status": "pass"
+      },
+      "post_eval": {
+        "status": "not_evaluated"
+      },
+      "trust_gate": {
+        "detail": {
+          "level": "L0_PROBATION"
+        },
+        "status": "escalate"
+      }
+    },
+    "issued_at": 1786496334603,
+    "previous_receipt_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "reason_code": "MATRIX_REQUIRE_APPROVAL",
+    "result_digest": "sha256:cdd0553e0fdc3af2269412d9e29f3ff6d87b5e1b1fab027ecadcdf0902b295f7",
+    "run_id": "16dda12f-fe0a-4a9b-b72f-56c0d80ff198",
+    "seq": 0,
+    "signer": {
+      "peer_gid": 20,
+      "peer_uid": 501
+    },
+    "spec": "zimam.receipt",
+    "spec_version": "1.0.0-draft.1",
+    "tenant_id": "6fce238b-4258-48bd-9dc3-e079489ed496",
+    "verdict": "escalate"
+  },
+  "signature": {
+    "alg": "EdDSA",
+    "kid": "sha256:d9bef6ccc49e9e4aa7fe461793763297220ba9bffb2a6ce284e28581525a6cf6",
+    "signature": "3NM17dLvVU9ZviI-qVLD8dBjbGkfBbih0ovQSMsf7gYlY7Sbqn_MiG5JM4gfuXW9ta8zad-M5UY73Sop9db-AQ"
+  }
+}
