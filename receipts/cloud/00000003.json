@@ -1,0 +1,67 @@
+{
+  "payload": {
+    "action": {
+      "action_class": "WRITE_INTERNAL",
+      "enforced_identity": "sha256:f63561c80756ac1c1488a09688885099ba4d867400c616b8ada1049269c3c1f1",
+      "input_identity": "sha256:f63561c80756ac1c1488a09688885099ba4d867400c616b8ada1049269c3c1f1",
+      "tool": "create_directory"
+    },
+    "agent_id": "claude-code",
+    "approval": {
+      "approver_id": "Majeed",
+      "decided_at": 1786954274147,
+      "initiator_id": "claude-code"
+    },
+    "controls_evaluated": {
+      "capability": {
+        "detail": {
+          "action_class": "WRITE_INTERNAL",
+          "registered": true
+        },
+        "status": "pass"
+      },
+      "ceilings": {
+        "status": "not_evaluated"
+      },
+      "identity": {
+        "detail": {
+          "credential": "8ec457a7-48c8-4272-82e2-df018e5e9470",
+          "method": "plane_token",
+          "subject": "claude-code"
+        },
+        "status": "pass"
+      },
+      "policy": {
+        "detail": {
+          "reason_code": "EXECUTE_SUCCESS"
+        },
+        "matched_count": 0,
+        "status": "pass"
+      },
+      "post_eval": {
+        "status": "not_evaluated"
+      },
+      "trust_gate": {
+        "detail": {
+          "level": "L0_PROBATION"
+        },
+        "status": "escalate"
+      }
+    },
+    "issued_at": 1786954274147,
+    "previous_receipt_hash": "sha256:d48367eda4a74fe76c68848e3ffc63c0673a119577d884bbc24d51676322de6f",
+    "reason_code": "MATRIX_REQUIRE_APPROVAL",
+    "result_digest": "sha256:a7ae34bd9129a550d68a99afde221e5427b3156beeef6531b1c0490b63c9a85e",
+    "run_id": "c1c7109b-9a52-4832-98d2-28d3e6572201",
+    "seq": 3,
+    "spec": "zimam.receipt",
+    "spec_version": "1.0.0-draft.1",
+    "tenant_id": "6fce238b-4258-48bd-9dc3-e079489ed496",
+    "verdict": "escalate"
+  },
+  "signature": {
+    "alg": "ES256",
+    "kid": "sha256:7a05a09d3d9bd188869e4b988794c79890a454f17a32431f0c96b0db7e15da01",
+    "signature": "iYprne0MxCpQE_y61aFXbQ4ZdlAd9zy_nEb5PQ4rQDFlAetL92hJfK6B1niNB_7f02luaHbUgVB5BmFMnLGdOA"
+  }
+}

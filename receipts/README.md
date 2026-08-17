@@ -29,24 +29,48 @@ repository's HEAD commit. Its result digest therefore **cryptographically
 commits this signed chain to the exact repository state that built the
 signer that signed it**. Self-reference, closed with mathematics.
 
-## The cloud chain (`cloud/`) — one stream, two signing custodies
+## The cloud chain (`cloud/`) — seven receipts, two custodies, one refusal
 
-Two nights later the same agent ran governed against the **live cloud
-evidence store** (the control plane on Railway, verified-ingest — the plane
-re-checks every signature, guard, and chain link before a row exists).
+The same agent then ran governed against the **live cloud evidence store**
+(the control plane on Railway, verified-ingest — the plane re-checks every
+signature, guard, and chain link before a row exists). The stream now reads
+like a diary of the product growing up:
 
-- [`cloud/00000000.json`](cloud/00000000.json) — 12 August, signed by the
-  same separated **Rust signer** (EdDSA, kernel-attested caller), a governed
-  read of this very directory's README, held until a human granted it.
-- [`cloud/00000001.json`](cloud/00000001.json) — 14 August, signed by an
-  **AWS KMS key in Frankfurt that has never existed outside its HSM**
-  (ES256 over the same RFC 8785 bytes). Approved from the Zimam console UI.
-  Its result digest commit-anchors `.git/refs/heads/main` again — this time
-  to the commit that added the KMS adapter itself.
+- [`#0`](cloud/00000000.json) — 12 August, signed by the same separated
+  **Rust signer** (EdDSA, kernel-attested caller), a governed read of this
+  very directory's README, held until a human granted it.
+- [`#1`](cloud/00000001.json) — 14 August, signed by an **AWS KMS key in
+  Frankfurt that has never existed outside its HSM** (ES256 over the same
+  RFC 8785 bytes). Approved from the Zimam console UI. Its result digest
+  commit-anchors `.git/refs/heads/main` — the commit that added the KMS
+  adapter itself.
+- [`#2`](cloud/00000002.json) — 17 August, the first receipt whose
+  `identity` layer reads **`pass`**: the agent booted with a plane-issued
+  credential, the gateway verified it *before serving a single call*, and
+  the verified `{method, subject, credential}` sits inside the signed
+  bytes. The governed action, fittingly: reading ADR 0009 — the identity
+  design itself.
+- [`#3`–`#4`](cloud/00000003.json) — 17 August, the **first WRITE_INTERNAL
+  in the stream's history**: the agent prepares a directory and writes a
+  working note, each held for a human (39 s and 9 s).
+- [`#5`](cloud/00000005.json) — 17 August, the **first refusal**. The
+  agent's plan said "rename the note" — `move_file`, classified
+  DESTRUCTIVE. The default policy matrix does not escalate DESTRUCTIVE at
+  L0 probation; it refuses outright: verdict `deny`, reason `MATRIX_BLOCK`,
+  decided in about a second. No human was asked. Nothing executed — the
+  receipt carries **no approval and no result digest**, and the verifier
+  checks both. Blocks are not punishments: the trust score was untouched.
+- [`#6`](cloud/00000006.json) — 17 August, the agent **corrects its own
+  note through governance**: the note had claimed the rename happened; the
+  truthful rewrite was granted and executed. The plan said move; the policy
+  said no; the record says both, forever — `#6` chains onto the refusal's
+  own payload digest.
 
 Same stream, same chain rules, different keys and different algorithms —
 resolved by key id exactly the way the store's registry does. A demotion of
-one custody never orphans the history of the other.
+one custody never orphans the history of the other. And a refusal is a
+first-class link: evidence stores that only remember successes are
+scrapbooks, not records.
 
 ## Verify everything yourself
 
@@ -56,14 +80,17 @@ From the repository root, with Node ≥ 22.18:
 node receipts/verify.mjs
 ```
 
-Twenty checks across both chains: every signature against the published
+Twenty-five checks across both chains: every signature against the published
 public keys ([`signer.pub`](signer.pub), [`kms-signer.pub`](kms-signer.pub)),
 the five signing-time guards on every payload, both gap-free chains from the
-all-zero genesis — one of them mixed-algorithm — and both commit anchors
-recomputed from first principles. The same canonical bytes reproduce in
-TypeScript, Python, and Rust — this repository's cross-language vectors live
-in [`../vectors/`](../vectors/), with stdlib-only verifiers in both Python
-and JavaScript.
+all-zero genesis — one of them seven receipts long and mixed-algorithm —
+both commit anchors recomputed from first principles, the identity layer's
+honesty in both directions (`not_evaluated` before ADR 0009, verified `pass`
+after), and the refusal's anatomy (no approval, no result digest, still
+chained). The same canonical bytes reproduce in TypeScript, Python, and
+Rust — this repository's cross-language vectors live in
+[`../vectors/`](../vectors/), with stdlib-only verifiers in both Python and
+JavaScript.
 
 ## What the receipts do NOT contain
 
@@ -77,9 +104,15 @@ reveal nothing otherwise. Receipts are references, never payloads.
 - These receipts govern the **MCP gateway path**. The coding agent's native
   tooling ran ungoverned alongside it — Zimam was not fully built under its
   own governance, and we will not claim otherwise until it is.
-- `identity` reads `not_evaluated` because the governor does not yet verify
-  agent identity itself (the mTLS/OIDC binding is future work); what IS
-  attested is the kernel-verified identity of the signer's caller.
+- `identity` reads `not_evaluated` on the earliest receipts because the
+  governor did not yet verify agent identity — and the records say so
+  rather than pretend. From cloud receipt `#2` on, the layer reads `pass`:
+  a plane-issued bearer credential (stored only as its sha256) verified at
+  gateway boot, with the verified subject required to equal the configured
+  agent or the gateway refuses to start. Bearer tokens are the first rung —
+  mTLS/OIDC bindings remain future work, and the evidence store also
+  re-checks `plane_token` claims against its own credential registry at
+  ingest.
 - Both processes ran as one OS user here (a laptop demo). The production
   posture — signer as its own user, key unreadable to the gateway — is
   enforced by the signer itself: it refuses keys readable beyond their

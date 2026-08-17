@@ -1,0 +1,67 @@
+{
+  "payload": {
+    "action": {
+      "action_class": "READ",
+      "enforced_identity": "sha256:9389a7f9055c0a0a11d5903c00ea593e06ff2694e7d59098eabda0c80e37ae02",
+      "input_identity": "sha256:9389a7f9055c0a0a11d5903c00ea593e06ff2694e7d59098eabda0c80e37ae02",
+      "tool": "read_text_file"
+    },
+    "agent_id": "claude-code",
+    "approval": {
+      "approver_id": "Majeed",
+      "decided_at": 1786924917372,
+      "initiator_id": "claude-code"
+    },
+    "controls_evaluated": {
+      "capability": {
+        "detail": {
+          "action_class": "READ",
+          "registered": true
+        },
+        "status": "pass"
+      },
+      "ceilings": {
+        "status": "not_evaluated"
+      },
+      "identity": {
+        "detail": {
+          "credential": "8ec457a7-48c8-4272-82e2-df018e5e9470",
+          "method": "plane_token",
+          "subject": "claude-code"
+        },
+        "status": "pass"
+      },
+      "policy": {
+        "detail": {
+          "reason_code": "EXECUTE_SUCCESS"
+        },
+        "matched_count": 0,
+        "status": "pass"
+      },
+      "post_eval": {
+        "status": "not_evaluated"
+      },
+      "trust_gate": {
+        "detail": {
+          "level": "L0_PROBATION"
+        },
+        "status": "escalate"
+      }
+    },
+    "issued_at": 1786924917372,
+    "previous_receipt_hash": "sha256:65894c1df58167b6d0bf873f51c4292af5a4f006a8f39881c6109847f804fe34",
+    "reason_code": "MATRIX_REQUIRE_APPROVAL",
+    "result_digest": "sha256:9cb6ece4737ec4df74f8e3fbce2e863f8e22743d589cb3bd2113efa102620898",
+    "run_id": "4c57d705-bdce-4b08-bc0a-8f73b1c45e25",
+    "seq": 2,
+    "spec": "zimam.receipt",
+    "spec_version": "1.0.0-draft.1",
+    "tenant_id": "6fce238b-4258-48bd-9dc3-e079489ed496",
+    "verdict": "escalate"
+  },
+  "signature": {
+    "alg": "ES256",
+    "kid": "sha256:7a05a09d3d9bd188869e4b988794c79890a454f17a32431f0c96b0db7e15da01",
+    "signature": "KHtQTNZ2jWwL86yMhsTwAnrFE1FboHXZsQHq3Gw6iCIw1QYcQnymO8kHWgkgigMg4jkFv4QC076XTHykVsIS5g"
+  }
+}

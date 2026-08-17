@@ -1,0 +1,67 @@
+{
+  "payload": {
+    "action": {
+      "action_class": "WRITE_INTERNAL",
+      "enforced_identity": "sha256:cb3b56c8f8c43b7d94f71c6564663827d2c58b6f46f987550667ccd51009ab07",
+      "input_identity": "sha256:cb3b56c8f8c43b7d94f71c6564663827d2c58b6f46f987550667ccd51009ab07",
+      "tool": "write_file"
+    },
+    "agent_id": "claude-code",
+    "approval": {
+      "approver_id": "Majeed",
+      "decided_at": 1786954284063,
+      "initiator_id": "claude-code"
+    },
+    "controls_evaluated": {
+      "capability": {
+        "detail": {
+          "action_class": "WRITE_INTERNAL",
+          "registered": true
+        },
+        "status": "pass"
+      },
+      "ceilings": {
+        "status": "not_evaluated"
+      },
+      "identity": {
+        "detail": {
+          "credential": "8ec457a7-48c8-4272-82e2-df018e5e9470",
+          "method": "plane_token",
+          "subject": "claude-code"
+        },
+        "status": "pass"
+      },
+      "policy": {
+        "detail": {
+          "reason_code": "EXECUTE_SUCCESS"
+        },
+        "matched_count": 0,
+        "status": "pass"
+      },
+      "post_eval": {
+        "status": "not_evaluated"
+      },
+      "trust_gate": {
+        "detail": {
+          "level": "L0_PROBATION"
+        },
+        "status": "escalate"
+      }
+    },
+    "issued_at": 1786954284063,
+    "previous_receipt_hash": "sha256:a446bab24e41fecfd431db06509ff6d56d389bd5494dd82402ad2b457d5f06a8",
+    "reason_code": "MATRIX_REQUIRE_APPROVAL",
+    "result_digest": "sha256:ec19eefd7f73916058651f2b6097dd7e7deb74dcb26ab8ee3fac224875d1d0d3",
+    "run_id": "e8ea4f4f-9226-4cc9-93e6-0b40789bd15d",
+    "seq": 4,
+    "spec": "zimam.receipt",
+    "spec_version": "1.0.0-draft.1",
+    "tenant_id": "6fce238b-4258-48bd-9dc3-e079489ed496",
+    "verdict": "escalate"
+  },
+  "signature": {
+    "alg": "ES256",
+    "kid": "sha256:7a05a09d3d9bd188869e4b988794c79890a454f17a32431f0c96b0db7e15da01",
+    "signature": "jXMUd2Qk8a9EG3TBfL2Lwvbxhb3V19TO9EurvMDSdPhgSVRJSe-Oq8nG9Rvo8h40N-lkITdLttekXIf-RxpSmQ"
+  }
+}

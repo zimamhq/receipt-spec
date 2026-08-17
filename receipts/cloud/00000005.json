@@ -1,0 +1,61 @@
+{
+  "payload": {
+    "action": {
+      "action_class": "DESTRUCTIVE",
+      "enforced_identity": "sha256:c595e753ebae1c2abafcfd4230291c295496ed635351f17370999bae941c69ea",
+      "input_identity": "sha256:c595e753ebae1c2abafcfd4230291c295496ed635351f17370999bae941c69ea",
+      "tool": "move_file"
+    },
+    "agent_id": "claude-code",
+    "controls_evaluated": {
+      "capability": {
+        "detail": {
+          "action_class": "DESTRUCTIVE",
+          "registered": true
+        },
+        "status": "pass"
+      },
+      "ceilings": {
+        "status": "not_evaluated"
+      },
+      "identity": {
+        "detail": {
+          "credential": "8ec457a7-48c8-4272-82e2-df018e5e9470",
+          "method": "plane_token",
+          "subject": "claude-code"
+        },
+        "status": "pass"
+      },
+      "policy": {
+        "detail": {
+          "reason_code": "EXECUTE_SUCCESS"
+        },
+        "matched_count": 0,
+        "status": "pass"
+      },
+      "post_eval": {
+        "status": "not_evaluated"
+      },
+      "trust_gate": {
+        "detail": {
+          "level": "L0_PROBATION"
+        },
+        "status": "deny"
+      }
+    },
+    "issued_at": 1786954287522,
+    "previous_receipt_hash": "sha256:47fdf52b4600eeca11aaec163050c1d8f51b6e9dd3155adf6abedde1057be72c",
+    "reason_code": "MATRIX_BLOCK",
+    "run_id": "e1b1d3a3-e7d5-4f83-892e-456c9641db26",
+    "seq": 5,
+    "spec": "zimam.receipt",
+    "spec_version": "1.0.0-draft.1",
+    "tenant_id": "6fce238b-4258-48bd-9dc3-e079489ed496",
+    "verdict": "deny"
+  },
+  "signature": {
+    "alg": "ES256",
+    "kid": "sha256:7a05a09d3d9bd188869e4b988794c79890a454f17a32431f0c96b0db7e15da01",
+    "signature": "bbY-IZqo0FwHznXnZS5X4sy8AXCPRTMnwRNiwCkPAN_K950qt7LhMN4g1i-4WK1OXgz7HEi0glViuz2644llOA"
+  }
+}

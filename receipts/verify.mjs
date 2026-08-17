@@ -55,23 +55,32 @@ check('chain verifies gap-free', verifyChain([s0.payload, s1.payload]).valid);
 check('#1 commit-anchors HEAD 53fc09a', anchorDigest('53fc09abe216d43498b32cdd31740fcbe13df8b3') === s1.payload.result_digest);
 check('kernel attestation present (peer_uid/peer_gid)', Number.isInteger(s0.payload.signer?.peer_uid));
 
-console.log('the cloud chain — one stream, two custodies');
-const c0 = read('cloud/00000000.json');
-const c1 = read('cloud/00000001.json');
+console.log('the cloud chain — one stream, two custodies, and the first refusal');
+const cloud = [0, 1, 2, 3, 4, 5, 6].map((n) => read(`cloud/${String(n).padStart(8, '0')}.json`));
+const [c0, c1, , , , c5, c6] = cloud;
 check('cloud #0 signature (Rust signer, EdDSA)', verify(c0));
 check('cloud #1 signature (AWS KMS, ES256)', verify(c1));
+check('cloud #2–#6 signatures (all KMS)', cloud.slice(2).every(verify));
 check('cloud #1 really is ES256', c1.signature.alg === 'ES256');
-check('the two receipts carry DIFFERENT key ids', c0.signature.kid !== c1.signature.kid);
-check('cloud guards pass across both custodies', guardViolations(c0.payload, null).length === 0 && guardViolations(c1.payload, 0).length === 0);
+check('the two custodies carry DIFFERENT key ids', c0.signature.kid !== c1.signature.kid);
+check('guards pass on every cloud receipt', cloud.every((r, i) => guardViolations(r.payload, i === 0 ? null : i - 1).length === 0));
 check('cloud genesis is the all-zero value', c0.payload.previous_receipt_hash === GENESIS);
-check('cloud #1 links to cloud #0 by payload digest', c1.payload.previous_receipt_hash === payloadDigest(c0.payload));
-check('the mixed-algorithm chain verifies gap-free', verifyChain([c0.payload, c1.payload]).valid);
+check('the seven-receipt mixed-algorithm chain verifies gap-free', verifyChain(cloud.map((r) => r.payload)).valid);
 check('cloud #1 commit-anchors HEAD 75841dc (the KMS adapter commit)', anchorDigest('75841dc7fe2db707df12806ab9e747775fcafccd') === c1.payload.result_digest);
-check('every approval names distinct initiator and approver', [s0, s1, c0, c1].every((r) => !r.payload.approval || r.payload.approval.initiator_id !== r.payload.approval.approver_id));
+check('#0–#1 predate agent identity and say so: not_evaluated', [c0, c1].every((r) => r.payload.controls_evaluated.identity.status === 'not_evaluated'));
+check('#2 onward: identity PASS inside the signed bytes (plane_token)', cloud.slice(2).every((r) => {
+  const id = r.payload.controls_evaluated.identity;
+  return id.status === 'pass' && id.detail?.method === 'plane_token' && id.detail?.subject === r.payload.agent_id;
+}));
+check('#3–#4: the first WRITE_INTERNAL in the stream', [cloud[3], cloud[4]].every((r) => r.payload.action.action_class === 'WRITE_INTERNAL'));
+check('#5 is a DENY: MATRIX_BLOCK on a DESTRUCTIVE tool at L0', c5.payload.verdict === 'deny' && c5.payload.reason_code === 'MATRIX_BLOCK' && c5.payload.action.action_class === 'DESTRUCTIVE');
+check('#5 never asked a human and never executed (no approval, no result digest)', !c5.payload.approval && !c5.payload.result_digest);
+check('#5 sits INSIDE the chain — refusals are receipted, not dropped', c6.payload.previous_receipt_hash === payloadDigest(c5.payload));
+check('every approval names distinct initiator and approver', [s0, s1, ...cloud].every((r) => !r.payload.approval || r.payload.approval.initiator_id !== r.payload.approval.approver_id));
 
 console.log(
   failures === 0
-    ? '\nAll checks passed. Two chains, two custodies — a kernel-attested local signer and a Frankfurt HSM — every signature verifiable from this directory alone.'
+    ? '\nAll checks passed. Two chains, two custodies — a kernel-attested local signer and a Frankfurt HSM — a verified agent identity from receipt #2 on, and one refusal kept forever in the chain. Every signature verifiable from this directory alone.'
     : `\n${failures} check(s) FAILED.`,
 );
 process.exit(failures === 0 ? 0 : 1);
