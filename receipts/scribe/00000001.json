@@ -1,0 +1,67 @@
+{
+  "payload": {
+    "action": {
+      "action_class": "READ",
+      "enforced_identity": "sha256:9389a7f9055c0a0a11d5903c00ea593e06ff2694e7d59098eabda0c80e37ae02",
+      "input_identity": "sha256:9389a7f9055c0a0a11d5903c00ea593e06ff2694e7d59098eabda0c80e37ae02",
+      "tool": "read_text_file"
+    },
+    "agent_id": "docs-scribe",
+    "approval": {
+      "approver_id": "Majeed",
+      "decided_at": 1787145863122,
+      "initiator_id": "docs-scribe"
+    },
+    "controls_evaluated": {
+      "capability": {
+        "detail": {
+          "action_class": "READ",
+          "registered": true
+        },
+        "status": "pass"
+      },
+      "ceilings": {
+        "status": "not_evaluated"
+      },
+      "identity": {
+        "detail": {
+          "credential": "f9a8fc2c-3c9a-4e31-a0e7-2af66d14b341",
+          "method": "plane_token",
+          "subject": "docs-scribe"
+        },
+        "status": "pass"
+      },
+      "policy": {
+        "detail": {
+          "reason_code": "EXECUTE_SUCCESS"
+        },
+        "matched_count": 0,
+        "status": "pass"
+      },
+      "post_eval": {
+        "status": "not_evaluated"
+      },
+      "trust_gate": {
+        "detail": {
+          "level": "L0_PROBATION"
+        },
+        "status": "escalate"
+      }
+    },
+    "issued_at": 1787145863122,
+    "previous_receipt_hash": "sha256:4aa61883801776391657d8fe0d375a4aa32f57939f50dd4c5a0a9aceca09e6b5",
+    "reason_code": "MATRIX_REQUIRE_APPROVAL",
+    "result_digest": "sha256:9cb6ece4737ec4df74f8e3fbce2e863f8e22743d589cb3bd2113efa102620898",
+    "run_id": "a66cc71a-4ae9-482c-9d4a-60d7344a93f4",
+    "seq": 1,
+    "spec": "zimam.receipt",
+    "spec_version": "1.0.0-draft.1",
+    "tenant_id": "6fce238b-4258-48bd-9dc3-e079489ed496",
+    "verdict": "escalate"
+  },
+  "signature": {
+    "alg": "ES256",
+    "kid": "sha256:7a05a09d3d9bd188869e4b988794c79890a454f17a32431f0c96b0db7e15da01",
+    "signature": "zwjc5O0vl-OKjOm6ZH-sBPkSvFTYDqUCkvyL3v4C-VmUXyhI-3fZXcdPVvbVyfUY2SBzDXDzmM0jEdvofCRAVA"
+  }
+}

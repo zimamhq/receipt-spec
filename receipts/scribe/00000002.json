@@ -1,0 +1,71 @@
+{
+  "payload": {
+    "action": {
+      "action_class": "READ",
+      "enforced_identity": "sha256:9476cff0d4519db859aa1acbc2801bb2bdadb97624342723dff427301995ba65",
+      "input_identity": "sha256:9476cff0d4519db859aa1acbc2801bb2bdadb97624342723dff427301995ba65",
+      "tool": "read_text_file"
+    },
+    "agent_id": "docs-scribe",
+    "approval": {
+      "approver_attestation": {
+        "method": "plane_api_key",
+        "principal": "cf883d05-bf17-451d-91e0-4b2f013eab25"
+      },
+      "approver_id": "Majeed",
+      "decided_at": 1787161386450,
+      "initiator_id": "docs-scribe"
+    },
+    "controls_evaluated": {
+      "capability": {
+        "detail": {
+          "action_class": "READ",
+          "registered": true
+        },
+        "status": "pass"
+      },
+      "ceilings": {
+        "status": "not_evaluated"
+      },
+      "identity": {
+        "detail": {
+          "credential": "f9a8fc2c-3c9a-4e31-a0e7-2af66d14b341",
+          "method": "plane_token",
+          "subject": "docs-scribe"
+        },
+        "status": "pass"
+      },
+      "policy": {
+        "detail": {
+          "reason_code": "EXECUTE_SUCCESS"
+        },
+        "matched_count": 0,
+        "status": "pass"
+      },
+      "post_eval": {
+        "status": "not_evaluated"
+      },
+      "trust_gate": {
+        "detail": {
+          "level": "L0_PROBATION"
+        },
+        "status": "escalate"
+      }
+    },
+    "issued_at": 1787161386450,
+    "previous_receipt_hash": "sha256:a9c64cfe8d1d7c0e6def74d530d0c7b9383d9165abb863906e1badc32a22a8d7",
+    "reason_code": "MATRIX_REQUIRE_APPROVAL",
+    "result_digest": "sha256:f1cef59e0b3c3c3fdf7b1266223c8819bcfc1a35d303e21bb09bc33744dcab15",
+    "run_id": "bddfd01b-43e6-4e25-861f-70ca25f443c1",
+    "seq": 2,
+    "spec": "zimam.receipt",
+    "spec_version": "1.0.0-draft.1",
+    "tenant_id": "6fce238b-4258-48bd-9dc3-e079489ed496",
+    "verdict": "escalate"
+  },
+  "signature": {
+    "alg": "ES256",
+    "kid": "sha256:7a05a09d3d9bd188869e4b988794c79890a454f17a32431f0c96b0db7e15da01",
+    "signature": "pg58boQxZnSz4uxOo4d0-9WbjoydKD4-8pM6LH9UtUsEqjbfiy9_Nv01GXCZOSgfr1sn6FiTydu8N6c5TCoYvA"
+  }
+}

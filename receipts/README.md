@@ -1,4 +1,4 @@
-# The published signed receipts — two chains, two custodies
+# The published signed receipts — three chains, two custodies
 
 On 12 August 2026, the coding agent building Zimam asked to read Zimam's own
 `README.md`. It was not allowed to.
@@ -72,6 +72,36 @@ one custody never orphans the history of the other. And a refusal is a
 first-class link: evidence stores that only remember successes are
 scrapbooks, not records.
 
+## The second agent (`scribe/`) — weighted work, and an attested approver
+
+A workforce is more than one agent, so the store holds more than one chain.
+`docs-scribe` is a second governed agent with its own credential, its own
+trust ledger, and a deliberately narrower brief — its tool registry contains
+no destructive tools at all.
+
+- [`scribe/#0`](scribe/00000000.json), [`#1`](scribe/00000001.json) — 19
+  August, a directory listing and a file read, each held for a human. Their
+  governed calls carry **impact hints** (0.1 and 0.3): the two grants bought
+  **0.4 weighted successes** toward a 20-success promotion gate, where
+  counting calls would have bought 2. A success on a trivial action must not
+  buy the trust a consequential one does, or an agent farms its way to
+  autonomy through busywork.
+- [`scribe/#2`](scribe/00000002.json) — the first receipt in this store
+  whose **approver identity was attested rather than typed**. Every earlier
+  approval records `approver_id`, a display name nothing verified; this one
+  also carries `approver_attestation: { method: "plane_api_key", principal }`
+  — the authenticated key that submitted the decision, recorded by the plane
+  and not accepted from the request body. The verifier checks that this
+  principal is **not** the agent's own credential: names can be typed, two
+  verified principals cannot collide by accident.
+
+The two earlier scribe receipts have no attestation at all, and say so by
+**omission** — the field is absent, not empty. A verifier must never read an
+absence as a passed check. (`#2` still declares `spec_version`
+`1.0.0-draft.1` while carrying a draft.2 field: it was issued in the hour
+between the field landing and the version bump, and is published as issued
+rather than reissued. The record is what happened.)
+
 ## Verify everything yourself
 
 From the repository root, with Node ≥ 22.18:
@@ -80,7 +110,7 @@ From the repository root, with Node ≥ 22.18:
 node receipts/verify.mjs
 ```
 
-Twenty-five checks across both chains: every signature against the published
+Thirty-three checks across all three chains: every signature against the published
 public keys ([`signer.pub`](signer.pub), [`kms-signer.pub`](kms-signer.pub)),
 the five signing-time guards on every payload, both gap-free chains from the
 all-zero genesis — one of them seven receipts long and mixed-algorithm —
@@ -104,6 +134,11 @@ reveal nothing otherwise. Receipts are references, never payloads.
 - These receipts govern the **MCP gateway path**. The coding agent's native
   tooling ran ungoverned alongside it — Zimam was not fully built under its
   own governance, and we will not claim otherwise until it is.
+- An API key identifies a **key, not a person**: everyone sharing a console
+  password shares its key, so `approver_attestation` proves which credential
+  approved, not which human held it. Per-user sessions, OIDC subjects, and
+  reviewer-signed approvals are the rungs above, and the `{method,
+  principal}` envelope exists so they arrive without a format break.
 - `identity` reads `not_evaluated` on the earliest receipts because the
   governor did not yet verify agent identity — and the records say so
   rather than pretend. From cloud receipt `#2` on, the layer reads `pass`:

@@ -93,7 +93,7 @@
       "name": "genesis-allow",
       "payload": {
         "spec": "zimam.receipt",
-        "spec_version": "1.0.0-draft.1",
+        "spec_version": "1.0.0-draft.2",
         "seq": 0,
         "issued_at": 1700000000000,
         "tenant_id": "tenant-vector",
@@ -144,19 +144,19 @@
         "previous_receipt_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
         "result_digest": "sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2"
       },
-      "jcs": "{\"action\":{\"action_class\":\"COMM_EXTERNAL\",\"enforced_identity\":\"sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30\",\"input_identity\":\"sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30\",\"tool\":\"mail.send\"},\"agent_id\":\"agent-vector\",\"controls_evaluated\":{\"capability\":{\"detail\":{\"action_class\":\"COMM_EXTERNAL\",\"registered\":true},\"status\":\"pass\"},\"ceilings\":{\"status\":\"not_evaluated\"},\"identity\":{\"detail\":{\"agent_id\":\"agent-vector\"},\"status\":\"not_evaluated\"},\"policy\":{\"detail\":{\"reason_code\":\"EXECUTE_SUCCESS\"},\"matched_count\":0,\"status\":\"pass\"},\"post_eval\":{\"status\":\"not_evaluated\"},\"trust_gate\":{\"detail\":{\"level\":\"L2_TRUSTED\"},\"status\":\"pass\"}},\"issued_at\":1700000000000,\"previous_receipt_hash\":\"sha256:0000000000000000000000000000000000000000000000000000000000000000\",\"reason_code\":\"EXECUTE_SUCCESS\",\"result_digest\":\"sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2\",\"run_id\":\"run-0\",\"seq\":0,\"spec\":\"zimam.receipt\",\"spec_version\":\"1.0.0-draft.1\",\"tenant_id\":\"tenant-vector\",\"verdict\":\"allow\"}",
-      "sha256": "sha256:2e9fa3dd09378ca6efd85b936c88d729265b133f064bd8cdc7820c37b0ed0c70",
+      "jcs": "{\"action\":{\"action_class\":\"COMM_EXTERNAL\",\"enforced_identity\":\"sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30\",\"input_identity\":\"sha256:fef170eed17d415834710c44f8f847d3a7b32fd8ce30a192ac3ccc97e0e8cb30\",\"tool\":\"mail.send\"},\"agent_id\":\"agent-vector\",\"controls_evaluated\":{\"capability\":{\"detail\":{\"action_class\":\"COMM_EXTERNAL\",\"registered\":true},\"status\":\"pass\"},\"ceilings\":{\"status\":\"not_evaluated\"},\"identity\":{\"detail\":{\"agent_id\":\"agent-vector\"},\"status\":\"not_evaluated\"},\"policy\":{\"detail\":{\"reason_code\":\"EXECUTE_SUCCESS\"},\"matched_count\":0,\"status\":\"pass\"},\"post_eval\":{\"status\":\"not_evaluated\"},\"trust_gate\":{\"detail\":{\"level\":\"L2_TRUSTED\"},\"status\":\"pass\"}},\"issued_at\":1700000000000,\"previous_receipt_hash\":\"sha256:0000000000000000000000000000000000000000000000000000000000000000\",\"reason_code\":\"EXECUTE_SUCCESS\",\"result_digest\":\"sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2\",\"run_id\":\"run-0\",\"seq\":0,\"spec\":\"zimam.receipt\",\"spec_version\":\"1.0.0-draft.2\",\"tenant_id\":\"tenant-vector\",\"verdict\":\"allow\"}",
+      "sha256": "sha256:d499e809db6e1f7a411e208a383f3b892109aeb2ae844fb7fb642820eb95a615",
       "signature": {
         "alg": "EdDSA",
         "kid": "sha256:79b5b78696872d601bc7419c85cb3c390caaa912b59614d47c1cf86a540be466",
-        "signature": "rTV4wW6sEYWu40F-P9EFfLGarn0X4Kq1_AyVUQYhzYhJB0avJRLPG7KUBQFStIqmKgHttIhD6i_5NKHSxLXXDg"
+        "signature": "4m2rlegppCulahayOWBNnZ60HSEv9frH9ydVWWTw7SxIZyDOuGdpFZpgGwqLNVCI12syqPN9iZbB4kR_CI6EAQ"
       }
     },
     {
       "name": "transform-redaction",
       "payload": {
         "spec": "zimam.receipt",
-        "spec_version": "1.0.0-draft.1",
+        "spec_version": "1.0.0-draft.2",
         "seq": 1,
         "issued_at": 1700000001000,
         "tenant_id": "tenant-vector",
@@ -204,22 +204,22 @@
             "status": "not_evaluated"
           }
         },
-        "previous_receipt_hash": "sha256:2e9fa3dd09378ca6efd85b936c88d729265b133f064bd8cdc7820c37b0ed0c70",
+        "previous_receipt_hash": "sha256:d499e809db6e1f7a411e208a383f3b892109aeb2ae844fb7fb642820eb95a615",
         "result_digest": "sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2"
       },
-      "jcs": "{\"action\":{\"action_class\":\"COMM_EXTERNAL\",\"enforced_identity\":\"sha256:c2fb5670401065a7b03f03c2dbbdb5d0dcb685c1e304e23c4182c6927ed86b13\",\"input_identity\":\"sha256:0f3e52445f187466edff1f56b6feebc288d668c5c1522cdb0d1e6d25821e7674\",\"tool\":\"mail.send\"},\"agent_id\":\"agent-vector\",\"controls_evaluated\":{\"capability\":{\"detail\":{\"action_class\":\"COMM_EXTERNAL\",\"registered\":true},\"status\":\"pass\"},\"ceilings\":{\"status\":\"not_evaluated\"},\"identity\":{\"detail\":{\"agent_id\":\"agent-vector\"},\"status\":\"not_evaluated\"},\"policy\":{\"detail\":{\"reason_code\":\"TRANSFORM_APPLIED\"},\"matched_count\":1,\"status\":\"transform\"},\"post_eval\":{\"status\":\"not_evaluated\"},\"trust_gate\":{\"detail\":{\"level\":\"L2_TRUSTED\"},\"status\":\"pass\"}},\"issued_at\":1700000001000,\"previous_receipt_hash\":\"sha256:2e9fa3dd09378ca6efd85b936c88d729265b133f064bd8cdc7820c37b0ed0c70\",\"reason_code\":\"TRANSFORM_APPLIED\",\"result_digest\":\"sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2\",\"run_id\":\"run-1\",\"seq\":1,\"spec\":\"zimam.receipt\",\"spec_version\":\"1.0.0-draft.1\",\"tenant_id\":\"tenant-vector\",\"verdict\":\"transform\"}",
-      "sha256": "sha256:be497a742b5c334dc136ec01c429346bdfb603aeb5afe5ee5bf963dbf036d961",
+      "jcs": "{\"action\":{\"action_class\":\"COMM_EXTERNAL\",\"enforced_identity\":\"sha256:c2fb5670401065a7b03f03c2dbbdb5d0dcb685c1e304e23c4182c6927ed86b13\",\"input_identity\":\"sha256:0f3e52445f187466edff1f56b6feebc288d668c5c1522cdb0d1e6d25821e7674\",\"tool\":\"mail.send\"},\"agent_id\":\"agent-vector\",\"controls_evaluated\":{\"capability\":{\"detail\":{\"action_class\":\"COMM_EXTERNAL\",\"registered\":true},\"status\":\"pass\"},\"ceilings\":{\"status\":\"not_evaluated\"},\"identity\":{\"detail\":{\"agent_id\":\"agent-vector\"},\"status\":\"not_evaluated\"},\"policy\":{\"detail\":{\"reason_code\":\"TRANSFORM_APPLIED\"},\"matched_count\":1,\"status\":\"transform\"},\"post_eval\":{\"status\":\"not_evaluated\"},\"trust_gate\":{\"detail\":{\"level\":\"L2_TRUSTED\"},\"status\":\"pass\"}},\"issued_at\":1700000001000,\"previous_receipt_hash\":\"sha256:d499e809db6e1f7a411e208a383f3b892109aeb2ae844fb7fb642820eb95a615\",\"reason_code\":\"TRANSFORM_APPLIED\",\"result_digest\":\"sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2\",\"run_id\":\"run-1\",\"seq\":1,\"spec\":\"zimam.receipt\",\"spec_version\":\"1.0.0-draft.2\",\"tenant_id\":\"tenant-vector\",\"verdict\":\"transform\"}",
+      "sha256": "sha256:9a35503065baefafc415ad6c27231cce773c57ae11ffadefcfbb58ebda0ba38b",
       "signature": {
         "alg": "EdDSA",
         "kid": "sha256:79b5b78696872d601bc7419c85cb3c390caaa912b59614d47c1cf86a540be466",
-        "signature": "SIEJhusKrqs7qnQ57SPZPnWwHZ2DQSOOWSiMgxCjMoRVxoO1FkHNCCYwX1qM7Mq-uEfmsxEJCfEn9WzxOxF7BA"
+        "signature": "5QMOOvpN0vTzN5NIzyJw4e9XsY21PypKF7yAOsYzyKzy3hQrakSqV5wpwhUqSvQedHIKYPdFUotAs6AzwaH7BQ"
       }
     },
     {
       "name": "approved-escalate",
       "payload": {
         "spec": "zimam.receipt",
-        "spec_version": "1.0.0-draft.1",
+        "spec_version": "1.0.0-draft.2",
         "seq": 2,
         "issued_at": 1700000002000,
         "tenant_id": "tenant-vector",
@@ -264,7 +264,7 @@
             "status": "not_evaluated"
           }
         },
-        "previous_receipt_hash": "sha256:be497a742b5c334dc136ec01c429346bdfb603aeb5afe5ee5bf963dbf036d961",
+        "previous_receipt_hash": "sha256:9a35503065baefafc415ad6c27231cce773c57ae11ffadefcfbb58ebda0ba38b",
         "approval": {
           "initiator_id": "agent-vector",
           "approver_id": "majeed",
@@ -272,19 +272,19 @@
         },
         "result_digest": "sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2"
       },
-      "jcs": "{\"action\":{\"action_class\":\"COMM_EXTERNAL\",\"enforced_identity\":\"sha256:c5c77e83be64dfc88fb0f4f2f02b2e0bc0672ce9f62fbf3ac2e7e1035508d20a\",\"input_identity\":\"sha256:c5c77e83be64dfc88fb0f4f2f02b2e0bc0672ce9f62fbf3ac2e7e1035508d20a\",\"tool\":\"mail.send\"},\"agent_id\":\"agent-vector\",\"approval\":{\"approver_id\":\"majeed\",\"decided_at\":1700000002500,\"initiator_id\":\"agent-vector\"},\"controls_evaluated\":{\"capability\":{\"detail\":{\"action_class\":\"COMM_EXTERNAL\",\"registered\":true},\"status\":\"pass\"},\"ceilings\":{\"status\":\"not_evaluated\"},\"identity\":{\"detail\":{\"agent_id\":\"agent-vector\"},\"status\":\"not_evaluated\"},\"policy\":{\"detail\":{\"reason_code\":\"ESCALATE_RULE\"},\"matched_count\":2,\"status\":\"escalate\"},\"post_eval\":{\"status\":\"not_evaluated\"},\"trust_gate\":{\"status\":\"not_evaluated\"}},\"issued_at\":1700000002000,\"previous_receipt_hash\":\"sha256:be497a742b5c334dc136ec01c429346bdfb603aeb5afe5ee5bf963dbf036d961\",\"reason_code\":\"ESCALATE_RULE\",\"result_digest\":\"sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2\",\"run_id\":\"run-2\",\"seq\":2,\"spec\":\"zimam.receipt\",\"spec_version\":\"1.0.0-draft.1\",\"tenant_id\":\"tenant-vector\",\"verdict\":\"escalate\"}",
-      "sha256": "sha256:d4ef9e527367d16a1ea3507bca9292495682cd80056e80109c385c101056ff06",
+      "jcs": "{\"action\":{\"action_class\":\"COMM_EXTERNAL\",\"enforced_identity\":\"sha256:c5c77e83be64dfc88fb0f4f2f02b2e0bc0672ce9f62fbf3ac2e7e1035508d20a\",\"input_identity\":\"sha256:c5c77e83be64dfc88fb0f4f2f02b2e0bc0672ce9f62fbf3ac2e7e1035508d20a\",\"tool\":\"mail.send\"},\"agent_id\":\"agent-vector\",\"approval\":{\"approver_id\":\"majeed\",\"decided_at\":1700000002500,\"initiator_id\":\"agent-vector\"},\"controls_evaluated\":{\"capability\":{\"detail\":{\"action_class\":\"COMM_EXTERNAL\",\"registered\":true},\"status\":\"pass\"},\"ceilings\":{\"status\":\"not_evaluated\"},\"identity\":{\"detail\":{\"agent_id\":\"agent-vector\"},\"status\":\"not_evaluated\"},\"policy\":{\"detail\":{\"reason_code\":\"ESCALATE_RULE\"},\"matched_count\":2,\"status\":\"escalate\"},\"post_eval\":{\"status\":\"not_evaluated\"},\"trust_gate\":{\"status\":\"not_evaluated\"}},\"issued_at\":1700000002000,\"previous_receipt_hash\":\"sha256:9a35503065baefafc415ad6c27231cce773c57ae11ffadefcfbb58ebda0ba38b\",\"reason_code\":\"ESCALATE_RULE\",\"result_digest\":\"sha256:13bb20ee0ef0a359ce59ee3d4df373c47e1a50b4c8178e136cbc413fb1b4b6c2\",\"run_id\":\"run-2\",\"seq\":2,\"spec\":\"zimam.receipt\",\"spec_version\":\"1.0.0-draft.2\",\"tenant_id\":\"tenant-vector\",\"verdict\":\"escalate\"}",
+      "sha256": "sha256:595e604d6d9eb62b30ba4ce2c394986f9fc86d6b1529f20b1dc0d3c62fb71c1f",
       "signature": {
         "alg": "EdDSA",
         "kid": "sha256:79b5b78696872d601bc7419c85cb3c390caaa912b59614d47c1cf86a540be466",
-        "signature": "-tsL4sTXjuf306MYhPXIwuHevEd1FzZj-qy9NV3tclKlomDXUt2Q7QqNHZpfQmskkncB2JfJrE2ah3JWDws8CA"
+        "signature": "xudgCbkZCo8AxcDdCPuC7P96_K8S2S4KIf_Ex8barefmk2TOkmfF7T_tUa32G0ivEfwU5zH74MfQium5Vkg-CQ"
       }
     },
     {
       "name": "deny-no-result",
       "payload": {
         "spec": "zimam.receipt",
-        "spec_version": "1.0.0-draft.1",
+        "spec_version": "1.0.0-draft.2",
         "seq": 3,
         "issued_at": 1700000003000,
         "tenant_id": "tenant-vector",
@@ -329,14 +329,14 @@
             "status": "not_evaluated"
           }
         },
-        "previous_receipt_hash": "sha256:d4ef9e527367d16a1ea3507bca9292495682cd80056e80109c385c101056ff06"
+        "previous_receipt_hash": "sha256:595e604d6d9eb62b30ba4ce2c394986f9fc86d6b1529f20b1dc0d3c62fb71c1f"
       },
-      "jcs": "{\"action\":{\"action_class\":\"COMM_EXTERNAL\",\"enforced_identity\":\"sha256:8391e730364712ca3c0c502021fe2128d9900c2f753813b2fc1a6b281cce1912\",\"input_identity\":\"sha256:8391e730364712ca3c0c502021fe2128d9900c2f753813b2fc1a6b281cce1912\",\"tool\":\"mail.send\"},\"agent_id\":\"agent-vector\",\"controls_evaluated\":{\"capability\":{\"detail\":{\"action_class\":\"COMM_EXTERNAL\",\"registered\":true},\"status\":\"pass\"},\"ceilings\":{\"status\":\"not_evaluated\"},\"identity\":{\"detail\":{\"agent_id\":\"agent-vector\"},\"status\":\"not_evaluated\"},\"policy\":{\"detail\":{\"reason_code\":\"BLOCK_RULE\"},\"matched_count\":1,\"status\":\"deny\"},\"post_eval\":{\"status\":\"not_evaluated\"},\"trust_gate\":{\"status\":\"not_evaluated\"}},\"issued_at\":1700000003000,\"previous_receipt_hash\":\"sha256:d4ef9e527367d16a1ea3507bca9292495682cd80056e80109c385c101056ff06\",\"reason_code\":\"BLOCK_RULE\",\"run_id\":\"run-3\",\"seq\":3,\"spec\":\"zimam.receipt\",\"spec_version\":\"1.0.0-draft.1\",\"tenant_id\":\"tenant-vector\",\"verdict\":\"deny\"}",
-      "sha256": "sha256:86991c65aabbf5b73fbd0f997ec4f1c0d66589a2fe5775d34460d24eb693f1e0",
+      "jcs": "{\"action\":{\"action_class\":\"COMM_EXTERNAL\",\"enforced_identity\":\"sha256:8391e730364712ca3c0c502021fe2128d9900c2f753813b2fc1a6b281cce1912\",\"input_identity\":\"sha256:8391e730364712ca3c0c502021fe2128d9900c2f753813b2fc1a6b281cce1912\",\"tool\":\"mail.send\"},\"agent_id\":\"agent-vector\",\"controls_evaluated\":{\"capability\":{\"detail\":{\"action_class\":\"COMM_EXTERNAL\",\"registered\":true},\"status\":\"pass\"},\"ceilings\":{\"status\":\"not_evaluated\"},\"identity\":{\"detail\":{\"agent_id\":\"agent-vector\"},\"status\":\"not_evaluated\"},\"policy\":{\"detail\":{\"reason_code\":\"BLOCK_RULE\"},\"matched_count\":1,\"status\":\"deny\"},\"post_eval\":{\"status\":\"not_evaluated\"},\"trust_gate\":{\"status\":\"not_evaluated\"}},\"issued_at\":1700000003000,\"previous_receipt_hash\":\"sha256:595e604d6d9eb62b30ba4ce2c394986f9fc86d6b1529f20b1dc0d3c62fb71c1f\",\"reason_code\":\"BLOCK_RULE\",\"run_id\":\"run-3\",\"seq\":3,\"spec\":\"zimam.receipt\",\"spec_version\":\"1.0.0-draft.2\",\"tenant_id\":\"tenant-vector\",\"verdict\":\"deny\"}",
+      "sha256": "sha256:2a8a9a2195fac901d67dde80335381c7c95bdd869a7ffe45b5b67b4470e11166",
       "signature": {
         "alg": "EdDSA",
         "kid": "sha256:79b5b78696872d601bc7419c85cb3c390caaa912b59614d47c1cf86a540be466",
-        "signature": "yeTKLJRnQqRh0t4x0Ds7_MQdTCNE76WiAuO1DJF2C24vYtkQPhcQfngY-TQBSF7pD-I64jZ3qB2g3AfdtmNwDg"
+        "signature": "yjQVnD2lTSurBAJjhH50-VBbMuspgiO5cYxIklqMXoH_VEq5X1E8sE22SuY3ueGjPFKDtQiuLXZlVL3aHg59Ag"
       }
     }
   ],
@@ -345,7 +345,7 @@
       "name": "self-approval",
       "payload": {
         "spec": "zimam.receipt",
-        "spec_version": "1.0.0-draft.1",
+        "spec_version": "1.0.0-draft.2",
         "seq": 0,
         "issued_at": 1700000000000,
         "tenant_id": "tenant-vector",
@@ -410,7 +410,7 @@
       "name": "false-control-attestation-missing-matched-count",
       "payload": {
         "spec": "zimam.receipt",
-        "spec_version": "1.0.0-draft.1",
+        "spec_version": "1.0.0-draft.2",
         "seq": 0,
         "issued_at": 1700000000000,
         "tenant_id": "tenant-vector",
@@ -469,7 +469,7 @@
       "name": "digest-not-wire-form",
       "payload": {
         "spec": "zimam.receipt",
-        "spec_version": "1.0.0-draft.1",
+        "spec_version": "1.0.0-draft.2",
         "seq": 0,
         "issued_at": 1700000000000,
         "tenant_id": "tenant-vector",
@@ -529,7 +529,7 @@
       "name": "float-in-signed-field",
       "payload": {
         "spec": "zimam.receipt",
-        "spec_version": "1.0.0-draft.1",
+        "spec_version": "1.0.0-draft.2",
         "seq": 0,
         "issued_at": 1700000000000.5,
         "tenant_id": "tenant-vector",
@@ -589,7 +589,7 @@
       "name": "sequence-gap",
       "payload": {
         "spec": "zimam.receipt",
-        "spec_version": "1.0.0-draft.1",
+        "spec_version": "1.0.0-draft.2",
         "seq": 0,
         "issued_at": 1700000000000,
         "tenant_id": "tenant-vector",

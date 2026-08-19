@@ -1,0 +1,67 @@
+{
+  "payload": {
+    "action": {
+      "action_class": "READ",
+      "enforced_identity": "sha256:7eb0e977aaf4d11f75503d240be2788451021196631cdca7940f290818e37880",
+      "input_identity": "sha256:7eb0e977aaf4d11f75503d240be2788451021196631cdca7940f290818e37880",
+      "tool": "list_directory"
+    },
+    "agent_id": "docs-scribe",
+    "approval": {
+      "approver_id": "Majeed",
+      "decided_at": 1787145854508,
+      "initiator_id": "docs-scribe"
+    },
+    "controls_evaluated": {
+      "capability": {
+        "detail": {
+          "action_class": "READ",
+          "registered": true
+        },
+        "status": "pass"
+      },
+      "ceilings": {
+        "status": "not_evaluated"
+      },
+      "identity": {
+        "detail": {
+          "credential": "f9a8fc2c-3c9a-4e31-a0e7-2af66d14b341",
+          "method": "plane_token",
+          "subject": "docs-scribe"
+        },
+        "status": "pass"
+      },
+      "policy": {
+        "detail": {
+          "reason_code": "EXECUTE_SUCCESS"
+        },
+        "matched_count": 0,
+        "status": "pass"
+      },
+      "post_eval": {
+        "status": "not_evaluated"
+      },
+      "trust_gate": {
+        "detail": {
+          "level": "L0_PROBATION"
+        },
+        "status": "escalate"
+      }
+    },
+    "issued_at": 1787145854508,
+    "previous_receipt_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "reason_code": "MATRIX_REQUIRE_APPROVAL",
+    "result_digest": "sha256:50600692763334c62d93900d276a9c71851fb145ee34b337891e276a31983172",
+    "run_id": "e307a481-27ee-40a5-abf7-4cb1a6bde673",
+    "seq": 0,
+    "spec": "zimam.receipt",
+    "spec_version": "1.0.0-draft.1",
+    "tenant_id": "6fce238b-4258-48bd-9dc3-e079489ed496",
+    "verdict": "escalate"
+  },
+  "signature": {
+    "alg": "ES256",
+    "kid": "sha256:7a05a09d3d9bd188869e4b988794c79890a454f17a32431f0c96b0db7e15da01",
+    "signature": "rWJp1wKodBQYKKwyXGEXUGTleiC0ZryNFYWWx-4Q8BUNpMv3hJ6LeWfJSkmrbj8_UCrfy-8Y2KqgsEj_RTn-Pw"
+  }
+}

@@ -1,10 +1,10 @@
-# Zimam Signed Receipt — Attestation Format (v1.0.0-draft.1)
+# Zimam Signed Receipt — Attestation Format (v1.0.0-draft.2)
 
 **License:** Apache-2.0 (this format is intended to become an interoperability
 standard for agent execution evidence; anyone may implement it, in anything,
 for any purpose).
 **Status:** **draft** — wire identifier `zimam.receipt`, version
-`1.0.0-draft.1`. Field semantics below are stable in intent; the format
+`1.0.0-draft.2`. Field semantics below are stable in intent; the format
 freezes to `1.0.0` per §11. Reference implementations: the TypeScript
 library, Rust signer, and control plane live in the main Zimam repository
 (opening with the product launch); this repository carries two standalone
@@ -33,7 +33,7 @@ A `SignedReceiptPayload` is a JSON object:
 | Field | Type | Presence | Meaning |
 |---|---|---|---|
 | `spec` | string | REQUIRED | Always `"zimam.receipt"`. |
-| `spec_version` | string | REQUIRED | SemVer of this document, e.g. `"1.0.0-draft.1"`. |
+| `spec_version` | string | REQUIRED | SemVer of this document, e.g. `"1.0.0-draft.2"`. |
 | `seq` | integer | REQUIRED | Position in the per-(tenant × agent) stream, starting at 0, gap-free (§6). |
 | `issued_at` | integer | REQUIRED | Epoch **milliseconds**. An integer — floats never appear in a signed field (§5). |
 | `tenant_id` | string | REQUIRED | The tenant the stream belongs to. |
@@ -47,7 +47,7 @@ A `SignedReceiptPayload` is a JSON object:
 | `reason_code` | string | REQUIRED | Machine-readable reason for the verdict. |
 | `controls_evaluated` | object | REQUIRED | The six-layer controls record (§4). |
 | `previous_receipt_hash` | digest | REQUIRED | Chain link (§6). |
-| `approval` | object | OPTIONAL | Present **only** when a human decided: `{ initiator_id, approver_id, decided_at }` (`decided_at` integer epoch ms). Omitted otherwise — never `null`. |
+| `approval` | object | OPTIONAL | Present **only** when a human decided: `{ initiator_id, approver_id, approver_attestation?, decided_at }` (`decided_at` integer epoch ms). Omitted otherwise — never `null`. See §7.1 — `approver_id` is a **claim**, `approver_attestation` is what was **verified**. |
 | `result_digest` | digest | OPTIONAL | Present **only** when an executed call produced a result; a deny or a failed execution has none. Absence is the honest record. |
 | `signer` | object | OPTIONAL | Custody attestation injected by the signing boundary (§9): `{ peer_uid, peer_gid }` (integers). Absent when the custody provides attestation elsewhere (e.g. a KMS key policy). |
 
@@ -163,11 +163,36 @@ the HSM). Two custody attestations exist in v1:
 - **KMS custody:** no `signer` field; who may invoke the key is attested by
   the key's IAM policy, outside the payload.
 
+### 9.1 The two halves of an approval
+
+`approver_id` is a **display name the reviewer supplied**. Nothing in this
+format verifies it, and a verifier MUST NOT read it as an identity: it exists
+so a human reading the record sees a human's name.
+
+`approver_attestation` is what the issuing system actually **verified** about
+the approver, as `{ method, principal }`:
+
+| field | meaning |
+| --- | --- |
+| `method` | how the approver was authenticated. `"plane_api_key"` is defined in this version; further methods (per-user sessions, OIDC subjects, client certificates) extend the enumeration without changing the shape. |
+| `principal` | the identifier the authentication established — an opaque string, meaningful within the issuing system. |
+
+The field is **omitted whenever nothing was verified**, and a verifier MUST
+NOT read an absent attestation as a passed one. An implementation that cannot
+attest its approvers is conformant; one that *invents* an attestation is not.
+
+The field is deliberately **not** named `*_identity`: §5 reserves that suffix
+for content digests, and guard 3 enforces it.
+
 **The five guards** run at the custody boundary and MUST refuse to sign —
 reject before signing, never annotate after:
 
 1. `self_approval_guard` — `approval.initiator_id` equals
-   `approval.approver_id`.
+   `approval.approver_id`; **or**, when both are present, the approver's
+   attested `principal` equals the agent's attested `credential` in
+   `controls_evaluated.identity.detail`. The first comparison is over names
+   anyone can type and is walked past by typing a different one; the second
+   is over what was verified on each half, and is not.
 2. `false_control_attestation_guard` — `controls_evaluated` violates §4.
 3. `digest_not_sha256_wire_form` — any `_hash`/`_digest`/`_identity` field
    fails the §5 wire form.
@@ -213,3 +238,23 @@ guard set survives external review. After freeze: MINOR adds optional
 fields or registered values only (a 1.0 verifier remains correct on 1.x
 payloads it accepts); MAJOR is reserved for changes that alter
 canonicalization, chaining, or guard semantics.
+
+## 12. Changelog
+
+### 1.0.0-draft.2
+
+- **Added** `approval.approver_attestation` (§9.1) — what the issuing system
+  verified about the approver, beside the `approver_id` display name it
+  never verified. Optional, and **omitted when nothing was verified**.
+- **Strengthened** `self_approval_guard` (§9, guard 1): where both
+  attestations are present, the approver's `principal` must not equal the
+  agent's attested `credential`. The name comparison alone is walked past by
+  typing a different name.
+- Vector corpus regenerated — the version string is inside every canonical
+  payload, so all vector signatures change with it.
+
+Receipts issued under `1.0.0-draft.1` remain valid and verify unchanged;
+the published chains in [`receipts/`](./receipts/) contain both versions.
+One receipt carries `approver_attestation` while still declaring draft.1 —
+issued in the hour between the field landing and this bump, and kept as
+issued rather than reissued. The record is what happened.

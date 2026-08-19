@@ -78,9 +78,26 @@ check('#5 never asked a human and never executed (no approval, no result digest)
 check('#5 sits INSIDE the chain — refusals are receipted, not dropped', c6.payload.previous_receipt_hash === payloadDigest(c5.payload));
 check('every approval names distinct initiator and approver', [s0, s1, ...cloud].every((r) => !r.payload.approval || r.payload.approval.initiator_id !== r.payload.approval.approver_id));
 
+console.log('the second agent — impact-weighted, and one attested approver');
+const scribe = [0, 1, 2].map((n) => read(`scribe/${String(n).padStart(8, '0')}.json`));
+check('every scribe receipt verifies against the registry', scribe.every(verify));
+check('the chain is gap-free from genesis', verifyChain(scribe.map((r) => r.payload)).valid);
+check('guards pass on all three', scribe.every((r, i) => guardViolations(r.payload, i === 0 ? null : i - 1).length === 0));
+check('a SECOND agent identity — separate stream, separate trust', scribe.every((r) => r.payload.agent_id === 'docs-scribe') && scribe[0].payload.agent_id !== c0.payload.agent_id);
+// ADR 0010 / draft.2: the approver's name is a claim; the attestation is not.
+const attested = scribe.find((r) => r.payload.approval?.approver_attestation);
+check('one receipt carries an ATTESTED approver (method + principal)', attested !== undefined
+  && attested.payload.approval.approver_attestation.method === 'plane_api_key'
+  && typeof attested.payload.approval.approver_attestation.principal === 'string');
+check('the attested approver is NOT the agent\'s own credential', attested !== undefined
+  && attested.payload.approval.approver_attestation.principal
+     !== attested.payload.controls_evaluated.identity.detail.credential);
+check('the earlier two are honest about having no attestation (absent, not empty)', scribe
+  .slice(0, 2).every((r) => r.payload.approval !== undefined && r.payload.approval.approver_attestation === undefined));
+
 console.log(
   failures === 0
-    ? '\nAll checks passed. Two chains, two custodies — a kernel-attested local signer and a Frankfurt HSM — a verified agent identity from receipt #2 on, and one refusal kept forever in the chain. Every signature verifiable from this directory alone.'
+    ? '\nAll checks passed. Three chains, two custodies — a kernel-attested local signer and a Frankfurt HSM — a verified agent identity from receipt #2 on, one refusal kept forever in the chain, a second agent with its own stream, and an approver whose identity was attested rather than typed. Every signature verifiable from this directory alone.'
     : `\n${failures} check(s) FAILED.`,
 );
 process.exit(failures === 0 ? 0 : 1);
