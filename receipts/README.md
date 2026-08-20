@@ -1,4 +1,4 @@
-# The published signed receipts — three chains, two custodies
+# The published signed receipts — four chains, two custodies
 
 On 12 August 2026, the coding agent building Zimam asked to read Zimam's own
 `README.md`. It was not allowed to.
@@ -102,6 +102,31 @@ absence as a passed check. (`#2` still declares `spec_version`
 between the field landing and the version bump, and is published as issued
 rather than reissued. The record is what happened.)
 
+## The third agent (`mailer/`) — a real external effect, two governing layers
+
+Every receipt above governs a filesystem read or write. These two govern
+something with a real external effect: sending an email. They are the first
+`COMM_EXTERNAL` receipts in the store — and together they show two layers of
+governance doing two different jobs on the same action.
+
+- [`mailer/#0`](mailer/00000000.json) — 20 August, `mail.send`, verdict
+  **`deny`**, reason **`BLOCK_RULE`**. The agent tried to send a message that
+  did not disclose its AI involvement. A **regulatory policy pack** (EU AI Act
+  Art. 50, which requires that disclosure on any external communication)
+  refused it — **before any human was asked**. No approval, no result digest:
+  the rule caught it, the human never had to.
+- [`mailer/#1`](mailer/00000001.json) — the same tool, the same night, with
+  the disclosure added. Now the regulatory layer passes it and the **trust
+  layer** holds it: verdict `escalate`, `MATRIX_REQUIRE_APPROVAL`, because a
+  probationary agent may not send outside the org unattended. A human granted
+  it from the console, and the receipt records an **attested** approver — the
+  authenticated key that approved, not a typed name (§9.1).
+
+Two layers, two jobs: **the regulatory layer catches the known-wrong; the
+human layer decides the not-yet-trusted.** And the receipts record the
+recipient reference only — never the message body, which stays outside the
+signed bytes entirely.
+
 ## Verify everything yourself
 
 From the repository root, with Node ≥ 22.18:
@@ -110,7 +135,7 @@ From the repository root, with Node ≥ 22.18:
 node receipts/verify.mjs
 ```
 
-Thirty-three checks across all three chains: every signature against the published
+Forty-four checks across all four chains: every signature against the published
 public keys ([`signer.pub`](signer.pub), [`kms-signer.pub`](kms-signer.pub)),
 the five signing-time guards on every payload, both gap-free chains from the
 all-zero genesis — one of them seven receipts long and mixed-algorithm —

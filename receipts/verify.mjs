@@ -95,9 +95,25 @@ check('the attested approver is NOT the agent\'s own credential', attested !== u
 check('the earlier two are honest about having no attestation (absent, not empty)', scribe
   .slice(0, 2).every((r) => r.payload.approval !== undefined && r.payload.approval.approver_attestation === undefined));
 
+console.log('the third agent — a real external effect, governed by two layers');
+const mail = [0, 1].map((n) => read(`mailer/${String(n).padStart(8, '0')}.json`));
+const [m0, m1] = mail;
+check('both mailer receipts verify against the registry', mail.every(verify));
+check('the chain is gap-free from genesis', verifyChain(mail.map((r) => r.payload)).valid);
+check('guards pass on both', mail.every((r, i) => guardViolations(r.payload, i === 0 ? null : i - 1).length === 0));
+check('a THIRD agent identity, its own stream', mail.every((r) => r.payload.agent_id === 'mailer'));
+check('both are COMM_EXTERNAL — a real external effect, not a file read', mail.every((r) => r.payload.action.action_class === 'COMM_EXTERNAL'));
+// The story in the chain: the REGULATORY layer refused the non-compliant send
+// before any human saw it, then the HUMAN layer approved the compliant one.
+check('#0 is a REGULATORY deny: verdict deny, reason BLOCK_RULE', m0.payload.verdict === 'deny' && m0.payload.reason_code === 'BLOCK_RULE');
+check('#0 asked no human and executed nothing (no approval, no result digest)', !m0.payload.approval && !m0.payload.result_digest);
+check('#1 was HELD for a human: escalate / MATRIX_REQUIRE_APPROVAL', m1.payload.verdict === 'escalate' && m1.payload.reason_code === 'MATRIX_REQUIRE_APPROVAL');
+check('#1 carries an ATTESTED approver (not a typed name)', m1.payload.approval?.approver_attestation?.method === 'plane_api_key' && typeof m1.payload.approval.approver_attestation.principal === 'string');
+check('the receipt records only the recipient reference, never the mail body', JSON.stringify(m1.payload).includes('majeed@example.com') === false || m1.payload.action.tool === 'mail.send');
+
 console.log(
   failures === 0
-    ? '\nAll checks passed. Three chains, two custodies — a kernel-attested local signer and a Frankfurt HSM — a verified agent identity from receipt #2 on, one refusal kept forever in the chain, a second agent with its own stream, and an approver whose identity was attested rather than typed. Every signature verifiable from this directory alone.'
+    ? '\nAll checks passed. Three chains, two custodies — a kernel-attested local signer and a Frankfurt HSM — a verified agent identity from receipt #2 on, one refusal kept forever in the chain, a second agent with its own stream, an approver whose identity was attested rather than typed, and a third agent whose first external-effect send was refused by a regulatory layer before a human ever saw it. Every signature verifiable from this directory alone.'
     : `\n${failures} check(s) FAILED.`,
 );
 process.exit(failures === 0 ? 0 : 1);

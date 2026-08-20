@@ -1,0 +1,58 @@
+{
+  "payload": {
+    "action": {
+      "action_class": "COMM_EXTERNAL",
+      "enforced_identity": "sha256:3ae196e9ac4ad082f573a0f881cfdf574a73c04130e0ace9fa2b54f30f0c156e",
+      "input_identity": "sha256:3ae196e9ac4ad082f573a0f881cfdf574a73c04130e0ace9fa2b54f30f0c156e",
+      "tool": "mail.send"
+    },
+    "agent_id": "mailer",
+    "controls_evaluated": {
+      "capability": {
+        "detail": {
+          "action_class": "COMM_EXTERNAL",
+          "registered": true
+        },
+        "status": "pass"
+      },
+      "ceilings": {
+        "status": "not_evaluated"
+      },
+      "identity": {
+        "detail": {
+          "credential": "57bfc8e9-a6ab-428b-9e69-84186eca4c20",
+          "method": "plane_token",
+          "subject": "mailer"
+        },
+        "status": "pass"
+      },
+      "policy": {
+        "detail": {
+          "reason_code": "BLOCK_RULE"
+        },
+        "matched_count": 1,
+        "status": "deny"
+      },
+      "post_eval": {
+        "status": "not_evaluated"
+      },
+      "trust_gate": {
+        "status": "not_evaluated"
+      }
+    },
+    "issued_at": 1787265593985,
+    "previous_receipt_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "reason_code": "BLOCK_RULE",
+    "run_id": "7d87a8ce-1561-4114-8547-38ca2c537519",
+    "seq": 0,
+    "spec": "zimam.receipt",
+    "spec_version": "1.0.0-draft.2",
+    "tenant_id": "6fce238b-4258-48bd-9dc3-e079489ed496",
+    "verdict": "deny"
+  },
+  "signature": {
+    "alg": "ES256",
+    "kid": "sha256:7a05a09d3d9bd188869e4b988794c79890a454f17a32431f0c96b0db7e15da01",
+    "signature": "nlnHx0W9eQ1m2-NmZsLF3CCEI_hnIzyEOstPFEHgd1UkzCFD18XwvEmy5u51LTIdVYU8NUFUWxfUOlCRi-8hNQ"
+  }
+}

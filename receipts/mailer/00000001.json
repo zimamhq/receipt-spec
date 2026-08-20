@@ -1,0 +1,71 @@
+{
+  "payload": {
+    "action": {
+      "action_class": "COMM_EXTERNAL",
+      "enforced_identity": "sha256:e38f8fdc4c5eafcd0223177a7dd54a022f5237e46477a2cc838253d9f93c93cf",
+      "input_identity": "sha256:e38f8fdc4c5eafcd0223177a7dd54a022f5237e46477a2cc838253d9f93c93cf",
+      "tool": "mail.send"
+    },
+    "agent_id": "mailer",
+    "approval": {
+      "approver_attestation": {
+        "method": "plane_api_key",
+        "principal": "cf883d05-bf17-451d-91e0-4b2f013eab25"
+      },
+      "approver_id": "Majeed",
+      "decided_at": 1787265756495,
+      "initiator_id": "mailer"
+    },
+    "controls_evaluated": {
+      "capability": {
+        "detail": {
+          "action_class": "COMM_EXTERNAL",
+          "registered": true
+        },
+        "status": "pass"
+      },
+      "ceilings": {
+        "status": "not_evaluated"
+      },
+      "identity": {
+        "detail": {
+          "credential": "57bfc8e9-a6ab-428b-9e69-84186eca4c20",
+          "method": "plane_token",
+          "subject": "mailer"
+        },
+        "status": "pass"
+      },
+      "policy": {
+        "detail": {
+          "reason_code": "EXECUTE_SUCCESS"
+        },
+        "matched_count": 1,
+        "status": "pass"
+      },
+      "post_eval": {
+        "status": "not_evaluated"
+      },
+      "trust_gate": {
+        "detail": {
+          "level": "L0_PROBATION"
+        },
+        "status": "escalate"
+      }
+    },
+    "issued_at": 1787265756495,
+    "previous_receipt_hash": "sha256:55febd025b389dc3b530aa94a562ad870659293aa46effb47101a4655150100f",
+    "reason_code": "MATRIX_REQUIRE_APPROVAL",
+    "result_digest": "sha256:0ac08bca54d8940b25f9f308757835a8f292e8062f2bdeda84afebd20c41f8e9",
+    "run_id": "3cfd4c63-6119-47a8-bf87-c065693edb54",
+    "seq": 1,
+    "spec": "zimam.receipt",
+    "spec_version": "1.0.0-draft.2",
+    "tenant_id": "6fce238b-4258-48bd-9dc3-e079489ed496",
+    "verdict": "escalate"
+  },
+  "signature": {
+    "alg": "ES256",
+    "kid": "sha256:7a05a09d3d9bd188869e4b988794c79890a454f17a32431f0c96b0db7e15da01",
+    "signature": "o4x1kfFTDVYag9BdWk66s_GMfEW_aChSp__8pb4K3CUjib2ffZhsH6Y2wizwxRROu-AQeflmgSA9IZPIM7Hf3Q"
+  }
+}
