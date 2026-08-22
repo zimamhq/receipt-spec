@@ -113,7 +113,7 @@ check('the receipt records only the recipient reference, never the mail body', J
 
 console.log(
   failures === 0
-    ? '\nAll checks passed. Three chains, two custodies — a kernel-attested local signer and a Frankfurt HSM — a verified agent identity from receipt #2 on, one refusal kept forever in the chain, a second agent with its own stream, an approver whose identity was attested rather than typed, and a third agent whose first external-effect send was refused by a regulatory layer before a human ever saw it. Every signature verifiable from this directory alone.'
+    ? '\nAll checks passed. Four chains, two custodies — a kernel-attested local signer and a Frankfurt HSM — a verified agent identity from receipt #2 on, one refusal kept forever in the chain, a second agent with its own stream, an approver whose identity was attested rather than typed, and a third agent whose first external-effect send was refused by a regulatory layer before a human ever saw it. Every signature verifiable from this directory alone.'
     : `\n${failures} check(s) FAILED.`,
 );
 process.exit(failures === 0 ? 0 : 1);
